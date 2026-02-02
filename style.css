@@ -34,7 +34,7 @@ nav {
 
 .logo { 
     font-weight: 700; 
-    font-size: 1.2rem; 
+    font-size: 1.6rem; 
     letter-spacing: -0.5px;
     text-decoration: none;
     color: var(--text-main);
@@ -133,34 +133,125 @@ nav {
             gap: 20px;
         }
 
-        /* --- 4. SIDEBAR (Filtres) --- */
-        .sidebar {
-            width: 80px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            border-radius: 24px;
-            border: 1px solid var(--glass-border);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px 0;
-            gap: 20px;
-        }
+        /* --- 4. FILTRES HYBRIDES (Emoji Mobile / Texte PC) --- */
 
-        .icon-btn {
-            width: 45px;
-            height: 45px;
-            border-radius: 12px;
-            border: none;
-            background: transparent;
-            color: var(--text-muted);
-            cursor: pointer;
-            font-size: 1.2rem;
-            transition: 0.2s;
-        }
-        .icon-btn:hover { background: rgba(255,255,255,0.1); color: white; }
-        .icon-btn.active { background: var(--accent-color); color: white; box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4); }
+/* 1. CONFIGURATION MOBILE (Par défaut) */
+/* 1. CONFIGURATION MOBILE (Par défaut) */
+.filter-wrapper {
+    position: absolute;
+    bottom: 90px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    width: auto;
+    max-width: 95%;
+    
+    /* --- C'EST ICI : TRANSPARENCE TOTALE DU WRAPPER --- */
+    background: transparent; 
+    box-shadow: none;
+    border: none;
+    
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 10px;
+}
+.filter-wrapper::-webkit-scrollbar { display: none; }
 
+.filter-group {
+    position: relative;
+    display: flex;       
+    flex-direction: row; 
+    
+    /* On s'assure que le groupe aussi est transparent */
+    background: rgba(255, 255, 255, 0.8); /* Blanc semi-transparent */
+    backdrop-filter: blur(12px);          /* Le flou derrière */
+    -webkit-backdrop-filter: blur(12px);  /* Pour que ça marche sur iPhone */
+    border: 1px solid rgba(255, 255, 255, 0.4); /* Bordure subtile */
+  
+
+    padding: 5px;
+    border-radius: 50px;
+    gap: 10px; /* Espace confortable entre les émojis */
+}
+
+/* LE CURSEUR (La pilule) */
+#filter-highlighter {
+    position: absolute;
+    background: var(--accent-gradient);
+    border-radius: 50px; /* Bien rond pour les émojis */
+    z-index: 1;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 2px 10px rgba(108, 92, 231, 0.4);
+}
+
+/* LES BOUTONS (Mobile = Emoji seul) */
+.filter-option {
+    position: relative;
+    z-index: 2;
+    background: transparent;
+    border: none;
+    
+    /* Sur mobile, on veut des boutons presque carrés/ronds */
+    padding: 10px 14px; 
+    
+    border-radius: 50px;
+    font-size: 1.2rem; /* Emoji un peu plus gros */
+    cursor: pointer;
+    transition: color 0.3s;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+}
+
+/* --- LE SECRET : On cache le texte sur mobile --- */
+.filter-text {
+    display: none;
+}
+
+.filter-option.active { color: white !important; }
+
+
+/* 2. CONFIGURATION ORDI (> 768px) */
+@media (min-width: 768px) {
+    .filter-wrapper {
+        top: 200px;
+        left: 40px;
+        bottom: auto;
+        transform: none;
+        max-width: none;
+        background: transparent;
+        padding: 0;
+        overflow: visible;
+        width: fit-content;
+    }
+
+    .filter-group {
+        flex-direction: column;
+        background: var(--glass-bg); 
+        backdrop-filter: blur(10px);
+        border: 1px solid var(--glass-border);
+        border-radius: 20px;
+        box-shadow: none; 
+        padding: 8px;
+        min-width: 150px;
+        gap: 2px;
+    }
+    
+    .filter-option { 
+        color: var(--text-muted) !important;
+        font-size: 0.95rem; /* Texte taille normale */
+        padding: 12px 20px; /* Plus large */
+        justify-content: flex-start; /* Aligné à gauche */
+        gap: 10px;
+    }
+    
+    .filter-option:hover { color: white !important; }
+
+    /* --- LE SECRET : On ré-affiche le texte sur PC --- */
+    .filter-text {
+        display: inline;
+    }
+}
 
 /* --- 5. MAP AREA (Simulée) --- */
 
@@ -219,21 +310,83 @@ nav {
             color: rgba(255, 255, 255, 0.7);
         }
 
-        .host-btn {
-            position: absolute;
-            bottom: 30px;
-            right: 30px;
-            background: var(--accent-gradient);
-            color: white;
-            padding: 15px 30px;
-            border-radius: 50px;
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(108, 92, 231, 0.5);
-            transition: transform 0.2s;
-        }
-        .host-btn:hover { transform: scale(1.05); }
+/* Le Bouton Flottant (Host Activity) */
+.host-btn {
+    position: absolute;
+    bottom: 25px; /* Plus bas qu'avant (était à 100px) */
+    right: 40px;  /* Plus proche du coin (était à 50px) */
+    
+    /* Style Moderne */
+    background: var(--accent-gradient);
+    color: white;
+    border: none;
+    
+    /* Plus gros et plus épais */
+    padding: 16px 32px; /* Agrandit le bouton */
+    font-size: 1.1rem; /* Texte plus grand */
+    font-weight: 700; /* Texte plus gras */
+    letter-spacing: 0.5px;
+    
+    border-radius: 50px; /* Forme pilule bien arrondie */
+    cursor: pointer;
+    
+    /* Effet de flottement (ombre) */
+    box-shadow: 0 10px 30px rgba(108, 92, 231, 0.5);
+    
+    z-index: 1000;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+/* Animation au survol */
+.host-btn:hover {
+    transform: translateY(-5px) scale(1.05); /* Monte un peu et grossit */
+    box-shadow: 0 15px 40px rgba(108, 92, 231, 0.7); /* L'ombre s'intensifie */
+}
+
+/* --- BOUTON GÉOLOCALISATION --- */
+.geo-btn {
+    position: absolute;
+    bottom: 100px; /* Juste en dessous des boutons de zoom (+/-) */
+    left: 25px; /* Aligné avec les contrôles Leaflet standards */
+    
+    width: 40px; height: 40px;
+    background: white;
+    border: 2px solid rgba(0,0,0,0.2);
+    border-radius: 8px; /* Carré arrondi comme les contrôles Leaflet */
+    
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 1000; /* Au dessus de la carte */
+    
+    display: flex; justify-content: center; align-items: center;
+    transition: 0.2s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+
+    color: #2d3436; /* Couleur de l'icône (gris foncé) */
+    padding: 8px;   /* Pour que l'icône respire un peu */
+}
+
+.geo-btn:hover {
+    background: #f1f2f6;
+    transform: scale(1.05);
+}
+
+.geo-btn.loading {
+    animation: spin 1s infinite linear;
+}
+
+/* Petite animation de chargement si le GPS cherche */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(9, 132, 227, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(9, 132, 227, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(9, 132, 227, 0); }
+}
+
 
         /* Simulation des "Pins" (Activités) */
         .pin {
@@ -929,26 +1082,12 @@ nav {
     .map-wrapper { border-radius: 0; border: none; }
 
 
-    /* 4. Repositionnement des éléments flottants de la Map */
     
-    /* La barre de filtres (Sidebar) doit remonter au-dessus de la navbar */
-    .sidebar {
-        width: 90%;
-        height: 55px;
-        flex-direction: row;
-        justify-content: space-around;
-        position: absolute;
-        bottom: 85px; /* <--- IMPORTANT : Au dessus de la navbar (70px + marge) */
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 2000;
-        padding: 0;
-        background: rgba(26, 26, 29, 0.9); /* Fond sombre */
-    }
+    
 
     /* Le bouton Host remonte encore plus haut */
     .host-btn {
-        bottom: 150px; /* Au dessus des filtres */
+        bottom: 100px; /* Au dessus des filtres */
         right: 20px;
         padding: 10px 20px;
         z-index: 2000;
@@ -1135,19 +1274,28 @@ nav {
     padding: 30px;
     margin-bottom: 30px;
     position: relative;
-    overflow: hidden;
+    
+    /* --- CORRECTION ICI --- */
+    /* On enlève 'overflow: hidden' pour laisser sortir le menu */
+    overflow: visible; 
+    z-index: 10; /* On s'assure que la carte est au-dessus du reste */
 }
 
-/* Petit effet de dégradé en fond */
+/* On corrige le flou pour qu'il ne dépasse pas mochement */
 .profile-header-card::before {
     content: '';
     position: absolute;
-    top: -50px; right: -50px;
-    width: 200px; height: 200px;
+    /* On le plaque dans le coin, sans dépasser */
+    top: 10px; right: 10px; 
+    width: 150px; height: 150px; /* Un peu plus petit */
     background: var(--accent-color);
-    filter: blur(80px);
-    opacity: 0.3;
+    filter: blur(60px);
+    opacity: 0.25;
     pointer-events: none;
+    z-index: -1; /* Derrière le texte */
+    
+    /* Astuce : on arrondit le flou lui-même pour qu'il suive le bord */
+    border-radius: 50%; 
 }
 
 .profile-top {
@@ -1264,4 +1412,71 @@ nav {
     .edit-btn { margin: 0 auto; width: 100%; }
     .my-event { flex-direction: column; align-items: flex-start; gap: 10px; }
     .manage-btn { width: 100%; }
+}
+
+/* --- 15. DROPDOWN MENU (SETTINGS) --- */
+
+/* Le conteneur qui remplace le bouton seul */
+.settings-dropdown-wrapper {
+    position: relative; /* Indispensable pour que le menu se place par rapport à lui */
+    margin-left: auto; /* Pour le pousser à droite comme avant */
+}
+
+/* Le menu lui-même */
+.dropdown-menu {
+    position: absolute;
+    top: 100%; /* Juste en dessous du bouton */
+    right: 0;  /* Aligné à droite */
+    width: 200px;
+    background: #2d3436;
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    padding: 10px 0;
+    z-index: 9999;
+    
+    /* Animation d'ouverture */
+    display: none; /* Caché par défaut */
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: 0.2s;
+}
+
+/* Classe pour afficher le menu */
+.dropdown-menu.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(10px); /* Petit décalage vers le bas */
+}
+
+/* Les liens dans le menu */
+.dropdown-item {
+    display: block;
+    padding: 10px 20px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: 0.2s;
+}
+
+.dropdown-item:hover {
+    background: rgba(255,255,255,0.05);
+    color: white;
+}
+
+/* Ligne de séparation */
+.dropdown-divider {
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+    margin: 5px 0;
+}
+
+/* Le bouton Reset en rouge */
+.dropdown-item.text-danger { color: #ff7675; }
+.dropdown-item.text-danger:hover { background: rgba(255, 118, 117, 0.1); }
+
+/* Correction de l'épaisseur du bouton Settings */
+#settings-btn {
+    font-weight: 600; /* 600 = Semi-Bold (Demi-Gras) */
+    letter-spacing: 0.5px; /* Écarte légèrement les lettres pour la lisibilité */
 }

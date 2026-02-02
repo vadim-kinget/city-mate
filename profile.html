@@ -57,7 +57,16 @@
                     <p class="school-tag">🎓 Student at University of Lille</p>
                     <p class="join-date">Member since Sept. 2025</p>
                 </div>
-                <button class="edit-btn">⚙️ Settings</button>
+                <div class="settings-dropdown-wrapper">
+                    <button id="settings-btn" class="edit-btn">⚙️ Settings</button>
+                    
+                    <div id="settings-menu" class="dropdown-menu">
+                        <a href="#" class="dropdown-item">👤 Edit Profile</a>
+                        <a href="#" class="dropdown-item">🔔 Notifications</a>
+                        <a href="#" class="dropdown-item">🌙 Dark Mode</a>
+                        <div class="dropdown-divider"></div> <a href="#" id="reset-app-btn" class="dropdown-item text-danger">⚠️ Reset App</a>
+                    </div>
+                </div>
             </div>
 
             <div class="level-section">
@@ -157,6 +166,50 @@
                 chatDrawer.addEventListener('click', (e) => { if (e.target === chatDrawer) chatDrawer.classList.remove('open'); });
             }
         });
+
+        // --- GESTION DU MENU DÉROULANT ---
+
+        const settingsBtn = document.getElementById('settings-btn');
+        const settingsMenu = document.getElementById('settings-menu');
+        const resetBtn = document.getElementById('reset-app-btn');
+
+        if (settingsBtn && settingsMenu) {
+            
+            // 1. Ouvrir / Fermer le menu au clic
+            settingsBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); // Empêche de fermer tout de suite
+                settingsMenu.classList.toggle('show');
+            });
+
+            // 2. Fermer le menu si on clique ailleurs sur la page
+            document.addEventListener('click', (e) => {
+                if (!settingsMenu.contains(e.target) && e.target !== settingsBtn) {
+                    settingsMenu.classList.remove('show');
+                }
+            });
+
+            // 3. Action : Reset App (La seule qui marche pour l'instant)
+            if (resetBtn) {
+                resetBtn.addEventListener('click', (e) => {
+                    e.preventDefault(); // Empêche le lien de recharger la page
+                    
+                    if (confirm("⚠️ Warning\n\nThis will delete all your created events and reset the app. Are you sure?")) {
+                        localStorage.removeItem('citymate_events');
+                        alert("App reset successfully! 🧹");
+                        window.location.href = "index.html";
+                    }
+                });
+            }
+            
+            // 4. Action : Les autres boutons (Placeholders)
+            const otherLinks = settingsMenu.querySelectorAll('.dropdown-item:not(#reset-app-btn)');
+            otherLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    alert("Coming soon! 🚧");
+                });
+            });
+        }
     </script>
 </body>
 </html>

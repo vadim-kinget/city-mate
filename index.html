@@ -52,17 +52,41 @@
 
     <div class="main-container">
         
-        <aside class="sidebar">
-            <button class="icon-btn active" data-category="all" title="All">🔍</button>
-            <button class="icon-btn" data-category="food" title="Food">🍔</button>
-            <button class="icon-btn" data-category="events" title="Events">🎉</button>
-            <button class="icon-btn" data-category="study" title="Study Spots">📚</button>
-            <button class="icon-btn" data-category="partners" title="Partners">🤝</button>
-        </aside>
+        <div class="filter-wrapper">
+            <div class="filter-group">
+                <div id="filter-highlighter"></div>
+
+                <button class="filter-option active" onclick="filterMap('all')" id="filter-all">
+                    🔍 <span class="filter-text">All</span>
+                </button>
+                
+                <button class="filter-option" onclick="filterMap('food')">
+                    🍔 <span class="filter-text">Food</span>
+                </button>
+                
+                <button class="filter-option" onclick="filterMap('events')">
+                    🎉 <span class="filter-text">Events</span>
+                </button>
+                
+                <button class="filter-option" onclick="filterMap('study')">
+                    📚 <span class="filter-text">Study</span>
+                </button>
+                
+                <button class="filter-option" onclick="filterMap('partners')">
+                    🤝 <span class="filter-text">Partners</span>
+                </button>
+            </div>
+        </div>
 
         <main class="map-wrapper">
             
             <div id="map"></div>
+
+            <button id="locate-btn" class="geo-btn" title="Ma position">
+               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                   <path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3A8.994 8.994 0 0 0 13 3.06V1h-2v2.06A8.994 8.994 0 0 0 3.06 11H1v2h2.06A8.994 8.994 0 0 0 11 20.94V23h2v-2.06A8.994 8.994 0 0 0 20.94 13H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/>
+               </svg>
+            </button>
 
             <div class="search-bar">
                 <input type="text" id="search-input" placeholder="🔍 Search for places, friends...">
