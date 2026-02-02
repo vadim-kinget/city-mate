@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student City Guide</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%236c5ce7'/><text x='50' y='65' font-family='Arial, sans-serif' font-weight='bold' font-size='50' fill='white' text-anchor='middle'>CM</text></svg>">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">City<span>Mate</span></div>
+        <div class="nav-links">
+            <a href="index.html" class="active">Map</a>
+            <a href="guides.html">Guides</a>
+            <a href="deals.html">Deals</a>
+            <a href="#">Community</a>
+        </div>
+        <div class="user-profile">
+            <div class="avatar"></div>
+            <span>User</span>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        
+        <aside class="sidebar">
+            <button class="icon-btn active" data-category="all" title="All">🔍</button>
+            <button class="icon-btn" data-category="food" title="Food">🍔</button>
+            <button class="icon-btn" data-category="events" title="Events">🎉</button>
+            <button class="icon-btn" data-category="study" title="Study Spots">📚</button>
+            <button class="icon-btn" data-category="partners" title="Partners">🤝</button>
+        </aside>
+
+        <main class="map-wrapper">
+            
+            <div id="map"></div>
+
+            <div class="search-bar">
+                <span>🔍 Search for places, friends...</span>
+            </div>
+
+            <button class="host-btn">+ Host Activity</button>
+
+        </main>
+    </div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

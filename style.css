@@ -1,0 +1,485 @@
+/* --- 1. VARIABLES & RESET --- */
+        :root {
+            --bg-color: #0f0f12; /* Fond très sombre */
+            --glass-bg: rgba(255, 255, 255, 0.08); /* Effet verre */
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --accent-color: #6c5ce7; /* Violet vibrant */
+            --accent-gradient: linear-gradient(135deg, #6c5ce7, #a29bfe);
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            height: 100vh;
+            overflow: hidden; /* Pas de scroll sur la page principale */
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- 2. NAVIGATION --- */
+        nav {
+            height: 70px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.6rem;
+            letter-spacing: -0.5px;
+            
+            /* NOUVEAU : Pour gérer le fait que c'est un lien */
+            text-decoration: none; /* Enlève le soulignement moche */
+            color: var(--text-main); /* Force la couleur blanche */
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo span { color: #a29bfe; }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--text-main); }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--glass-bg);
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            cursor: pointer;
+        }
+        .avatar { width: 30px; height: 30px; background: #ddd; border-radius: 50%; }
+
+        /* --- 3. MAIN LAYOUT --- */
+        .main-container {
+            display: flex;
+            flex: 1; /* Prend tout l'espace restant */
+            padding: 20px;
+            gap: 20px;
+        }
+
+        /* --- 4. SIDEBAR (Filtres) --- */
+        .sidebar {
+            width: 80px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 0;
+            gap: 20px;
+        }
+
+        .icon-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: 0.2s;
+        }
+        .icon-btn:hover { background: rgba(255,255,255,0.1); color: white; }
+        .icon-btn.active { background: var(--accent-color); color: white; box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4); }
+
+        /* --- 5. MAP AREA (Simulée) --- */
+        .map-wrapper {
+            flex: 1;
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            /* Simulation visuelle de la carte sombre */     
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+            z-index: 0; /* La carte reste au fond */
+            background: #1a1a1d; /* Couleur de fond pendant le chargement */
+        }
+
+        /* Important : On s'assure que tes boutons flottants sont au-dessus de la carte */
+        .search-bar, .host-btn {
+            z-index: 1000; /* Très haut pour être sûr d'être au dessus */
+        }
+
+        /* Éléments flottants sur la carte */
+        .search-bar {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(15, 15, 18, 0.8);
+            backdrop-filter: blur(8px);
+            padding: 12px 20px;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            color: white;
+            width: 300px;
+            display: flex;
+            align-items: center;
+        }
+
+        .host-btn {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            background: var(--accent-gradient);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(108, 92, 231, 0.5);
+            transition: transform 0.2s;
+        }
+        .host-btn:hover { transform: scale(1.05); }
+
+        /* Simulation des "Pins" (Activités) */
+        .pin {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .pin:hover { transform: scale(1.1) translateY(-5px); z-index: 10; }
+        
+        .pin-marker {
+            width: 40px;
+            height: 40px;
+            border-radius: 50% 50% 0 50%;
+            background: var(--accent-color);
+            transform: rotate(45deg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            border: 2px solid white;
+        }
+        .pin-icon { transform: rotate(-45deg); font-size: 1.2rem; }
+        
+        .pin-label {
+            background: rgba(0,0,0,0.7);
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            margin-top: 10px;
+            backdrop-filter: blur(4px);
+        }
+
+        /* Positions arbitraires pour l'exemple */
+        .pin-1 { top: 40%; left: 30%; }
+        .pin-2 { top: 60%; left: 60%; --accent-color: #ff7675; }
+        .pin-3 { top: 30%; left: 70%; --accent-color: #00b894; }
+
+
+/* --- 6. LEAFLET CUSTOM MARKERS --- */
+
+/* Leaflet crée un wrapper autour de l'icône, on le rend transparent */
+.leaflet-marker-icon.custom-pin {
+    background: transparent;
+    border: none;
+}
+
+/* La forme du marqueur (goutte inversée) */
+.pin-marker {
+    width: 44px;
+    height: 44px;
+    border-radius: 50% 50% 0 50%; /* Forme de pointe */
+    background: var(--accent-color); /* Couleur par défaut (violet) */
+    transform: rotate(45deg); /* Rotation pour faire la pointe vers le bas */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Une petite bordure sombre pour que ça ressorte bien sur la carte sombre */
+    border: 3px solid var(--bg-color);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    position: relative;
+    transition: transform 0.2s ease;
+}
+
+/* Effet au survol du marqueur */
+.pin-marker:hover {
+   transform: rotate(45deg) scale(1.1) translateY(-3px);
+   z-index: 1000;
+}
+
+/* L'emoji à l'intérieur */
+.pin-icon {
+    /* On annule la rotation de 45deg pour que l'emoji soit droit, 
+       et on le centre parfaitement */
+    transform: rotate(-45deg);
+    font-size: 1.4rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    line-height: 1;
+}
+
+/* Classes utilitaires pour changer la couleur facilement */
+.bg-purple { background-color: #6c5ce7 !important; }
+.bg-red    { background-color: #ff7675 !important; }
+.bg-green  { background-color: #00b894 !important; }
+.bg-blue   { background-color: #0984e3 !important; }
+.bg-yellow { background-color: #fdcb6e !important; }
+
+
+/* --- 7. PAGE GUIDES --- */
+
+.guides-container {
+    padding: 40px 10%; /* Marges sur les côtés */
+    overflow-y: auto; /* Permet de scroller si la liste est longue */
+    height: calc(100vh - 70px); /* Toute la hauteur moins la navbar */
+}
+
+.guides-header {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.guides-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.guides-header p {
+    color: var(--text-muted);
+    margin-bottom: 20px;
+}
+
+/* Les petits boutons filtres (Tags) */
+.tags-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.tag {
+    padding: 8px 16px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: 0.3s;
+}
+
+.tag:hover, .tag.active {
+    background: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+}
+
+/* La Grille (Responsive) */
+.guides-grid {
+    display: grid;
+    /* Magie CSS : crée autant de colonnes que possible, minimum 280px de large */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: 30px;
+    padding-bottom: 50px;
+}
+
+/* La Carte Article */
+.guide-card {
+    background: #1a1a1d; /* Fond un peu plus clair que le body */
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+.guide-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-color);
+}
+
+/* Image/Vignette en haut de la carte */
+.card-thumb {
+    height: 140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+}
+
+/* Couleurs des vignettes */
+.admin-color { background: linear-gradient(135deg, #a29bfe, #6c5ce7); }
+.transport-color { background: linear-gradient(135deg, #ff7675, #d63031); }
+.health-color { background: linear-gradient(135deg, #55efc4, #00b894); }
+.housing-color { background: linear-gradient(135deg, #fdcb6e, #e17055); }
+
+.card-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1; /* Pour que le bas s'aligne */
+}
+
+.card-cat {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.guide-card h3 { font-size: 1.2rem; }
+.guide-card p { font-size: 0.9rem; color: #bbb; line-height: 1.5; }
+
+.read-btn {
+    margin-top: auto; /* Pousse le bouton tout en bas */
+    color: var(--accent-color); /* Couleur violette */
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+.read-btn:hover { text-decoration: underline; }
+
+/* --- 8. PAGE DEALS --- */
+
+.deals-container {
+    padding: 40px 10%;
+    overflow-y: auto;
+    height: calc(100vh - 70px);
+}
+
+.deals-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+.deals-header h1 { font-size: 2.5rem; margin-bottom: 10px; }
+.deals-header p { color: var(--text-muted); }
+
+.deals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    padding-bottom: 50px;
+}
+
+/* Le Ticket */
+.deal-ticket {
+    background: #1a1a1d;
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: transform 0.3s;
+}
+
+.deal-ticket:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-color);
+}
+
+/* Partie Haute (Infos) */
+.deal-top {
+    padding: 25px;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.brand-logo {
+    min-width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+}
+
+.deal-info h3 { font-size: 1.1rem; margin: 5px 0; }
+.deal-info p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; }
+
+.discount {
+    background: rgba(108, 92, 231, 0.2);
+    color: #a29bfe;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+/* Partie Basse (Bouton) avec effet pointillé */
+.deal-bottom {
+    position: relative;
+    padding: 20px;
+    text-align: center;
+}
+
+/* La ligne pointillée */
+.dashed-line {
+    position: absolute;
+    top: 0;
+    left: 10px;
+    right: 10px;
+    border-top: 2px dashed #333;
+}
+
+/* Les petits ronds sur les côtés pour faire effet ticket */
+.deal-ticket::before, .deal-ticket::after {
+    content: '';
+    position: absolute;
+    top: 67%; /* Ajuste selon la hauteur de ta carte */
+    width: 20px;
+    height: 20px;
+    background: var(--bg-color); /* Couleur du fond de la page pour "trouer" la carte */
+    border-radius: 50%;
+    z-index: 10;
+}
+.deal-ticket::before { left: -10px; }
+.deal-ticket::after { right: -10px; }
+
+
+/* Le Bouton Code */
+.code-btn {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px dashed var(--accent-color);
+    background: transparent;
+    color: var(--accent-color);
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.code-btn:hover {
+    background: rgba(108, 92, 231, 0.1);
+}

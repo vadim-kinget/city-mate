@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Guides - Lille</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%236c5ce7'/><text x='50' y='65' font-family='Arial, sans-serif' font-weight='bold' font-size='50' fill='white' text-anchor='middle'>CM</text></svg>">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav>
+        <div class="logo">
+             <a href="index.html" class="logo">City<span>Mate</span></a>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Map</a> <a href="guides.html" class="active">Guides</a> <a href="deals.html">Deals</a>
+            <a href="#">Community</a>
+        </div>
+        <div class="user-profile">
+            <div class="avatar"></div>
+            <span>User</span>
+        </div>
+    </nav>
+
+    <div class="guides-container">
+        
+        <header class="guides-header">
+            <h1>Survival Guides 🎓</h1>
+            <p>Everything you need to know about settling in Lille.</p>
+            
+            <div class="tags-row">
+                <span class="tag active" data-category="all">All</span>
+                <span class="tag" data-category="admin">Admin 📂</span>
+                <span class="tag" data-category="health">Health 🏥</span>
+                <span class="tag" data-category="transport">Transport 🚌</span>
+                <span class="tag" data-category="housing">Housing 🏠</span>
+            </div>
+        </header>
+
+        <div class="guides-grid">
+            
+            <article class="guide-card" data-category="admin">
+                <div class="card-thumb admin-color">📂</div>
+                <div class="card-content">
+                    <span class="card-cat">Administration</span>
+                    <h3>How to open a French bank account</h3>
+                    <p>Documents you need and the best banks for students in 2026.</p>
+                    <a href="#" class="read-btn">Read Article &rarr;</a>
+                </div>
+            </article>
+
+            <article class="guide-card" data-category="transport">
+                <div class="card-thumb transport-color">🚌</div>
+                <div class="card-content">
+                    <span class="card-cat">Transport</span>
+                    <h3>Understanding Ilevia (Metro & Bus)</h3>
+                    <p>How to get your student pass and avoid fines in the metro.</p>
+                    <a href="#" class="read-btn">Read Article &rarr;</a>
+                </div>
+            </article>
+
+            <article class="guide-card" data-category="health">
+                <div class="card-thumb health-color">🏥</div>
+                <div class="card-content">
+                    <span class="card-cat">Health</span>
+                    <h3>Seeing a Doctor in France</h3>
+                    <p>How "Doctolib" works and how to get reimbursed by Social Security.</p>
+                    <a href="#" class="read-btn">Read Article &rarr;</a>
+                </div>
+            </article>
+
+            <article class="guide-card" data-category="housing">
+                <div class="card-thumb housing-color">🏠</div>
+                <div class="card-content">
+                    <span class="card-cat">Housing</span>
+                    <h3>CAF & APL: Get money for rent</h3>
+                    <p>The ultimate guide to applying for housing assistance.</p>
+                    <a href="#" class="read-btn">Read Article &rarr;</a>
+                </div>
+            </article>
+
+        </div>
+    </div>
+
+<script>
+    // 1. On sélectionne tous les éléments nécessaires
+    const filters = document.querySelectorAll('.tag');
+    const cards = document.querySelectorAll('.guide-card');
+
+    // 2. On ajoute un "écouteur d'événement" (clic) sur chaque filtre
+    filters.forEach(filter => {
+        filter.addEventListener('click', () => {
+            
+            // A. Gérer l'apparence des boutons (Active / Inactif)
+            // On enlève la classe 'active' de tous les boutons...
+            filters.forEach(f => f.classList.remove('active'));
+            // ...et on l'ajoute uniquement sur celui qu'on vient de cliquer
+            filter.classList.add('active');
+
+            // B. Gérer le filtrage des articles
+            const categoryToFilter = filter.getAttribute('data-category');
+
+            cards.forEach(card => {
+                // On récupère la catégorie de la carte
+                const cardCategory = card.getAttribute('data-category');
+
+                // Si on a cliqué sur "All" OU si la catégorie correspond
+                if (categoryToFilter === 'all' || categoryToFilter === cardCategory) {
+                    card.style.display = 'flex'; // On affiche (flex pour garder la mise en page)
+                } else {
+                    card.style.display = 'none'; // On cache
+                }
+            });
+        });
+    });
+</script>
+
+
+</body>
+</html>
