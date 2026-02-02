@@ -19,7 +19,7 @@
             <a href="index.html" class="active">Map</a>
             <a href="guides.html">Guides</a>
             <a href="deals.html">Deals</a>
-            <a href="#">Community</a>
+            <a href="community.html">Community</a>
         </div>
         <div class="user-profile">
             <div class="avatar"></div>
@@ -42,13 +42,54 @@
             <div id="map"></div>
 
             <div class="search-bar">
-                <span>🔍 Search for places, friends...</span>
+                <input type="text" id="search-input" placeholder="🔍 Search for places, friends...">
             </div>
 
             <button class="host-btn">+ Host Activity</button>
 
         </main>
     </div>
+
+    <div id="modal-overlay" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2>✨ Host an Activity</h2>
+                <button id="close-modal" class="close-btn">&times;</button>
+            </div>
+            
+            <form id="activity-form">
+                <div class="form-group">
+                    <label>Event Name</label>
+                    <input type="text" id="event-name" placeholder="Ex: English Conversation Club" required>
+                </div>
+
+                <div class="form-group" style="flex: 2;"> <label>Street Address</label>
+                    <input type="text" id="event-address" placeholder="10 Rue de la Paix" required>
+                </div>
+                <div class="form-group" style="flex: 1;"> <label>City</label>
+                    <input type="text" id="event-city" placeholder="Paris" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Category</label>
+                    <select id="event-type">
+                        <option value="party">🎉 Party / Drink</option>
+                        <option value="food">🍔 Food</option>
+                        <option value="study">📚 Study Session</option>
+                        <option value="sport">⚽ Sport</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="event-desc" rows="3" placeholder="Time, details, what to bring..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Create Event</button>
+            </form>
+        </div>
+    </div>
+
 
 <script src="script.js"></script>
 
