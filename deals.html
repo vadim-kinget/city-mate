@@ -14,14 +14,35 @@
     <nav>
         <a href="index.html" class="logo">City<span>Mate</span></a>
         <div class="nav-links">
-            <a href="index.html">Map</a>
-            <a href="guides.html">Guides</a>
-            <a href="deals.html" class="active">Deals</a> <a href="community.html">Community</a>
+            <a href="index.html"> <span class="nav-icon">🗺️</span>
+                <span class="nav-text">Map</span>
+            </a>
+            <a href="guides.html">
+                <span class="nav-icon">📖</span>
+                <span class="nav-text">Guides</span>
+            </a>
+            <a href="deals.html" class="active">
+                <span class="nav-icon">🏷️</span>
+                <span class="nav-text">Deals</span>
+            </a>
+            <a href="community.html">
+                <span class="nav-icon">👥</span>
+                <span class="nav-text">Community</span>
+            </a>
         </div>
-        <div class="user-profile">
-            <div class="avatar"></div>
-            <span>User</span>
+
+            <div class="nav-right" style="display: flex; align-items: center; gap: 15px;">
+        
+            <button id="chat-toggle" class="chat-btn">
+                💬 <span class="notif-badge">2</span>
+            </button>
+
+            <a href="profile.html" class="user-profile">
+                <div class="avatar"></div>
+                <span>Alex</span>
+            </a>
         </div>
+
     </nav>
 
     <div class="deals-container">
@@ -93,5 +114,139 @@
                 </div>
             </div>
 
-         </div>            
+         </div> 
+    </div>
+<div id="chat-drawer" class="chat-drawer">
+    
+    <div class="chat-header">
+        <h3>Messages</h3>
+        <button id="close-chat" class="close-btn">&times;</button>
+    </div>
+
+    <div id="chat-list-view" class="chat-view active">
+        
+        <div class="chat-tabs">
+            <span class="chat-tab active">All</span>
+            <span class="chat-tab">Groups</span>
+            <span class="chat-tab">Private</span>
+        </div>
+
+        <div class="conversations-list">
+            
+            <div class="convo-item" onclick="openConversation('Museum Lovers 🎨', true)">
+                <div class="convo-avatar bg-purple">🎨</div>
+                <div class="convo-info">
+                    <h4>Museum Lovers</h4>
+                    <p>Lena: Anyone going to Palais des B...</p>
+                </div>
+                <span class="time">2m</span>
+            </div>
+
+            <div class="convo-item" onclick="openConversation('Sarah J. 🇬🇧', false)">
+                <div class="convo-avatar" style="background: #ff7675;">SJ</div>
+                <div class="convo-info">
+                    <h4>Sarah J.</h4>
+                    <p>That sounds great! See you there.</p>
+                </div>
+                <span class="time">1h</span>
+            </div>
+
+             <div class="convo-item unread">
+                <div class="convo-avatar" style="background: #0984e3;">MK</div>
+                <div class="convo-info">
+                    <h4>Mehdi K.</h4>
+                    <p>Do you know where the library is?</p>
+                </div>
+                <span class="time">3h</span>
+                <div class="unread-dot"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="chat-conversation-view" class="chat-view">
+        <div class="active-chat-header">
+            <button class="back-btn" onclick="closeConversation()">←</button>
+            <h4 id="current-chat-name">User Name</h4>
+        </div>
+
+        <div class="messages-container">
+            <div class="message received">
+                <p>Hey! Are you coming to the event tonight?</p>
+                <span class="msg-time">10:30 AM</span>
+            </div>
+
+            <div class="message sent">
+                <p>Yes absolutely! I'm bringing a friend.</p>
+                <span class="msg-time">10:32 AM</span>
+            </div>
+            
+            <div class="message received">
+                <p>Awesome, see you at the Gare St Sauveur! 🚂</p>
+                <span class="msg-time">10:33 AM</span>
+            </div>
+        </div>
+
+        <div class="chat-input-area">
+            <input type="text" placeholder="Type a message..." id="msg-input">
+            <button class="send-btn">➤</button>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        // 1. On récupère les éléments
+        const chatDrawer = document.getElementById('chat-drawer');
+        const chatToggle = document.getElementById('chat-toggle');
+        const closeChatBtn = document.getElementById('close-chat');
+
+        // Vérification de sécurité (au cas où on oublie le HTML)
+        if (chatToggle && chatDrawer) {
+            
+            // 2. Ouvrir le tiroir
+            chatToggle.addEventListener('click', () => {
+                chatDrawer.classList.add('open');
+            });
+
+            // 3. Fermer le tiroir
+            if (closeChatBtn) {
+                closeChatBtn.addEventListener('click', () => {
+                    chatDrawer.classList.remove('open');
+                });
+            }
+
+            // Fermer si on clique sur le fond flouté (optionnel mais sympa)
+            chatDrawer.addEventListener('click', (e) => {
+                if (e.target === chatDrawer) {
+                    chatDrawer.classList.remove('open');
+                }
+            });
+        }
+
+        // --- NAVIGATION DANS LE CHAT (Liste <-> Conversation) ---
+        const listView = document.getElementById('chat-list-view');
+        const convoView = document.getElementById('chat-conversation-view');
+        const chatTitle = document.getElementById('current-chat-name');
+
+        // On rend ces fonctions globales pour qu'elles marchent avec les onclick="..." du HTML
+        window.openConversation = function(name, isGroup) {
+            if(listView && convoView) {
+                listView.classList.remove('active');
+                convoView.classList.add('active');
+                if(chatTitle) chatTitle.textContent = name;
+            }
+        };
+
+        window.closeConversation = function() {
+            if(listView && convoView) {
+                convoView.classList.remove('active');
+                listView.classList.add('active');
+            }
+        };
+    });
+</script>
+
+</body>
 

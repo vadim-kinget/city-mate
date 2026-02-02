@@ -278,3 +278,39 @@ function resetFormMode() {
     form.querySelector('.submit-btn').textContent = "Create Event";
     modal.querySelector('h2').textContent = "✨ Host an Activity";
 }
+
+/* --- LOGIQUE DU TCHAT --- */
+
+const chatDrawer = document.getElementById('chat-drawer');
+const chatToggle = document.getElementById('chat-toggle');
+const closeChatBtn = document.getElementById('close-chat');
+
+// Ouvrir / Fermer le tiroir
+chatToggle.addEventListener('click', () => {
+    chatDrawer.classList.toggle('open');
+});
+
+closeChatBtn.addEventListener('click', () => {
+    chatDrawer.classList.remove('open');
+});
+
+// Navigation Liste <-> Conversation
+const listView = document.getElementById('chat-list-view');
+const convoView = document.getElementById('chat-conversation-view');
+const chatTitle = document.getElementById('current-chat-name');
+
+// Fonction appelée quand on clique sur une personne dans la liste
+window.openConversation = function(name, isGroup) {
+    listView.classList.remove('active');
+    convoView.classList.add('active');
+    
+    chatTitle.textContent = name;
+    
+    // Si c'est un groupe, on pourrait changer l'icône etc.
+}
+
+// Fonction retour arrière
+window.closeConversation = function() {
+    convoView.classList.remove('active');
+    listView.classList.add('active');
+}

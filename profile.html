@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - CityMate</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%236c5ce7'/><text x='50' y='65' font-family='Arial, sans-serif' font-weight='bold' font-size='50' fill='white' text-anchor='middle'>CM</text></svg>">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">City<span>Mate</span></a>
+        
+        <div class="nav-links">
+            <a href="index.html">
+                <span class="nav-icon">🗺️</span>
+                <span class="nav-text">Map</span>
+            </a>
+            <a href="guides.html">
+                <span class="nav-icon">📖</span>
+                <span class="nav-text">Guides</span>
+            </a>
+            <a href="deals.html">
+                <span class="nav-icon">🏷️</span>
+                <span class="nav-text">Deals</span>
+            </a>
+            <a href="community.html">
+                <span class="nav-icon">👥</span>
+                <span class="nav-text">Community</span>
+            </a>
+        </div>
+
+        <div class="nav-right" style="display: flex; align-items: center; gap: 15px;">
+            <button id="chat-toggle" class="chat-btn">
+                💬 <span class="notif-badge">2</span>
+            </button>
+            <a href="profile.html" class="user-profile active">
+                <div class="avatar"></div>
+                <span>Alex</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="profile-container">
+        
+        <div class="profile-header-card">
+            <div class="profile-top">
+                <div class="big-avatar"></div>
+                <div class="profile-info">
+                    <h1>Alex Doe</h1>
+                    <p class="school-tag">🎓 Student at University of Lille</p>
+                    <p class="join-date">Member since Sept. 2025</p>
+                </div>
+                <button class="edit-btn">⚙️ Settings</button>
+            </div>
+
+            <div class="level-section">
+                <div class="level-info">
+                    <span>Level 5 🌟</span>
+                    <span>1,250 / 2,000 XP</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 65%;"></div>
+                </div>
+                <p class="next-reward">Next reward: Free Coffee at Level 6 ☕</p>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+            
+            <div class="dash-card">
+                <h3>🏆 My Badges</h3>
+                <div class="badges-row">
+                    <div class="badge-item" title="First Event Hosted">
+                        <div class="badge-icon bg-purple">🎤</div>
+                        <span>Host</span>
+                    </div>
+                    <div class="badge-item" title="Used 5 Deals">
+                        <div class="badge-icon bg-yellow">🏷️</div>
+                        <span>Saver</span>
+                    </div>
+                    <div class="badge-item grayscale" title="Locked: Join 10 events">
+                        <div class="badge-icon">🚀</div>
+                        <span>Social</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dash-card">
+                <h3>🎟️ My Wallet</h3>
+                <div class="wallet-list">
+                    <div class="wallet-item">
+                        <span class="wallet-icon">🍔</span>
+                        <div>
+                            <strong>Big Fernand</strong>
+                            <span class="code-small">YUMMY20</span>
+                        </div>
+                    </div>
+                    <div class="wallet-item">
+                        <span class="wallet-icon">🎬</span>
+                        <div>
+                            <strong>UGC Ciné</strong>
+                            <span class="code-small">MOVIENIGHT</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dash-card full-width">
+                <h3>📅 My Hosted Events</h3>
+                <div class="my-events-list">
+                    <div class="my-event">
+                        <div class="event-status active">Active</div>
+                        <strong>English Conversation Club</strong>
+                        <span>📍 Gare Saint Sauveur • Tomorrow 18:00</span>
+                        <button class="manage-btn">Manage</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="chat-drawer" class="chat-drawer">
+        <div class="chat-header">
+            <h3>Messages</h3>
+            <button id="close-chat" class="close-btn">&times;</button>
+        </div>
+        <div id="chat-list-view" class="chat-view active">
+            <div class="conversations-list">
+                <div class="convo-item">
+                    <div class="convo-avatar bg-purple">🎨</div>
+                    <div class="convo-info">
+                        <h4>Museum Lovers</h4>
+                        <p>Welcome to the group!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatDrawer = document.getElementById('chat-drawer');
+            const chatToggle = document.getElementById('chat-toggle');
+            const closeChatBtn = document.getElementById('close-chat');
+
+            if (chatToggle && chatDrawer) {
+                chatToggle.addEventListener('click', () => chatDrawer.classList.add('open'));
+                if (closeChatBtn) closeChatBtn.addEventListener('click', () => chatDrawer.classList.remove('open'));
+                chatDrawer.addEventListener('click', (e) => { if (e.target === chatDrawer) chatDrawer.classList.remove('open'); });
+            }
+        });
+    </script>
+</body>
+</html>
