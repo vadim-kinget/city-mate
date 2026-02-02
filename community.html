@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community - CityMate</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%236c5ce7'/><text x='50' y='65' font-family='Arial, sans-serif' font-weight='bold' font-size='50' fill='white' text-anchor='middle'>CM</text></svg>">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">City<span>Mate</span></a>
+        <div class="nav-links">
+            <a href="index.html">Map</a>
+            <a href="guides.html">Guides</a>
+            <a href="deals.html">Deals</a>
+            <a href="community.html" class="active">Community</a> </div>
+        <div class="user-profile">
+            <div class="avatar"></div>
+            <span>User</span>
+        </div>
+    </nav>
+
+    <div class="community-container">
+        
+        <header class="community-header">
+            <h1>Community Hub 🌍</h1>
+            <p>Connect with people, join squads, and find your language buddy.</p>
+        </header>
+
+        <div class="comm-grid">
+            
+            <div class="comm-main">
+                
+                <div class="section-title">
+                    <h2>🔥 Popular Squads</h2>
+                    <a href="#">See all</a>
+                </div>
+
+                <div class="squads-row">
+                    <div class="squad-card">
+                        <div class="squad-icon bg-purple">🎨</div>
+                        <div class="squad-info">
+                            <h3>Museum Lovers</h3>
+                            <p>128 Members</p>
+                        </div>
+                        <button class="join-btn">Join</button>
+                    </div>
+
+                    <div class="squad-card">
+                        <div class="squad-icon bg-green">🥾</div>
+                        <div class="squad-info">
+                            <h3>Hikers of Lille</h3>
+                            <p>85 Members</p>
+                        </div>
+                        <button class="join-btn">Join</button>
+                    </div>
+
+                    <div class="squad-card">
+                        <div class="squad-icon bg-red">🎮</div>
+                        <div class="squad-info">
+                            <h3>Gaming Night</h3>
+                            <p>240 Members</p>
+                        </div>
+                        <button class="join-btn">Join</button>
+                    </div>
+                </div>
+
+                <div class="section-title" style="margin-top: 40px;">
+                    <h2>🗣️ Language Buddies</h2>
+                    <p class="subtitle">Practice a new language with a local.</p>
+                </div>
+
+                <div class="buddies-grid">
+                    <div class="buddy-card">
+                        <div class="buddy-avatar" style="background: #ff7675;">SJ</div>
+                        <div class="buddy-info">
+                            <h3>Sarah J.</h3>
+                            <div class="langs">
+                                <span class="lang-tag">🇬🇧 English</span>
+                                <span class="lang-arrow">➡️</span>
+                                <span class="lang-tag">🇫🇷 French</span>
+                            </div>
+                            <button class="connect-btn">Connect</button>
+                        </div>
+                    </div>
+
+                    <div class="buddy-card">
+                        <div class="buddy-avatar" style="background: #0984e3;">MK</div>
+                        <div class="buddy-info">
+                            <h3>Mehdi K.</h3>
+                            <div class="langs">
+                                <span class="lang-tag">🇲🇦 Arabic</span>
+                                <span class="lang-arrow">➡️</span>
+                                <span class="lang-tag">🇬🇧 English</span>
+                            </div>
+                            <button class="connect-btn">Connect</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <aside class="comm-sidebar">
+                <h3>🔔 Live Activity</h3>
+                
+                <div class="feed-list">
+                    <div class="feed-item">
+                        <div class="feed-icon">🍕</div>
+                        <div class="feed-content">
+                            <strong>Tom</strong> created an event <br>
+                            <span class="feed-highlight">Pizza Party @ Domos</span>
+                            <span class="feed-time">2 mins ago</span>
+                        </div>
+                    </div>
+
+                    <div class="feed-item">
+                        <div class="feed-icon">💬</div>
+                        <div class="feed-content">
+                            <strong>Lena</strong> joined <br>
+                            <span class="feed-highlight">Museum Lovers</span>
+                            <span class="feed-time">15 mins ago</span>
+                        </div>
+                    </div>
+
+                    <div class="feed-item">
+                        <div class="feed-icon">🎸</div>
+                        <div class="feed-content">
+                            <strong>Concert Alert</strong> <br>
+                            <span class="feed-highlight">Jazz Night at Gare St Sauveur</span>
+                            <span class="feed-time">1 hour ago</span>
+                        </div>
+                    </div>
+
+                    <div class="feed-item">
+                        <div class="feed-icon">👋</div>
+                        <div class="feed-content">
+                            <strong>New User</strong> <br>
+                            <span>Say hi to <strong>Yuki</strong> from Japan! 🇯🇵</span>
+                            <span class="feed-time">2 hours ago</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+        </div>
+    </div>
+
+    <script>
+        // Boutons Join
+        document.querySelectorAll('.join-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if(this.textContent === 'Join') {
+                    this.textContent = 'Joined ✓';
+                    this.style.background = 'transparent';
+                    this.style.border = '1px solid var(--accent-color)';
+                    this.style.color = 'var(--accent-color)';
+                } else {
+                    this.textContent = 'Join';
+                    this.style.background = 'var(--glass-bg)';
+                    this.style.border = 'none';
+                    this.style.color = 'white';
+                }
+            });
+        });
+
+        // Boutons Connect
+        document.querySelectorAll('.connect-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.textContent = 'Request Sent 📩';
+                this.style.background = '#00b894'; // Vert
+                this.disabled = true;
+            });
+        });
+    </script>
+</body>
+</html>
