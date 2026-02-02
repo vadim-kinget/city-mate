@@ -313,7 +313,7 @@ nav {
 /* Le Bouton Flottant (Host Activity) */
 .host-btn {
     position: absolute;
-    bottom: 25px; /* Plus bas qu'avant (était à 100px) */
+    bottom: 40px; /* Plus bas qu'avant (était à 100px) */
     right: 40px;  /* Plus proche du coin (était à 50px) */
     
     /* Style Moderne */
@@ -346,7 +346,7 @@ nav {
 /* --- BOUTON GÉOLOCALISATION --- */
 .geo-btn {
     position: absolute;
-    bottom: 100px; /* Juste en dessous des boutons de zoom (+/-) */
+    bottom: 150px; /* Juste en dessous des boutons de zoom (+/-) */
     left: 25px; /* Aligné avec les contrôles Leaflet standards */
     
     width: 40px; height: 40px;
@@ -1087,7 +1087,7 @@ nav {
 
     /* Le bouton Host remonte encore plus haut */
     .host-btn {
-        bottom: 100px; /* Au dessus des filtres */
+        bottom: 150px; /* Au dessus des filtres */
         right: 20px;
         padding: 10px 20px;
         z-index: 2000;
