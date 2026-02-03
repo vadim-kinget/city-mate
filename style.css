@@ -1494,3 +1494,23 @@ nav {
     font-weight: 600; /* 600 = Semi-Bold (Demi-Gras) */
     letter-spacing: 0.5px; /* Écarte légèrement les lettres pour la lisibilité */
 }
+
+/* --- BOUTON ITINÉRAIRE (DANS LA POPUP) --- */
+.direction-btn {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 6px 12px;
+    background: #0984e3; /* Bleu Maps */
+    color: white !important; /* Force le texte blanc */
+    text-decoration: none; /* Pas de soulignement */
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: transform 0.2s, background 0.2s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.direction-btn:hover {
+    background: #74b9ff;
+    transform: translateY(-2px);
+}

@@ -35,13 +35,13 @@ function createCustomIcon(emoji, colorClass) {
 }
 
 
-/// --- 3. GESTION DES MARQUEURS ---
+// --- 3. GESTION DES MARQUEURS ---
 var allMarkers = [];
 
 // Variable globale pour savoir si on modifie un marqueur existant
 let currentEditingMarker = null;
 
-// Fonction d'ajout
+// Fonction d'ajout (Avec bouton Itinéraire et lien corrigé)
 function addMarker(lat, lng, icon, category, popupText, isUserEvent = false, rawData = null) {
     var marker = L.marker([lat, lng], {icon: icon});
     
@@ -49,9 +49,23 @@ function addMarker(lat, lng, icon, category, popupText, isUserEvent = false, raw
     marker.isUserEvent = isUserEvent; 
     marker.searchText = popupText.replace(/<[^>]*>?/gm, '').toLowerCase();
 
+    // --- LIEN GOOGLE MAPS (CORRIGÉ) ---
+    // Ouvre l'app GPS sur mobile ou le site sur PC avec l'itinéraire
+    const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
+    
+    // Ajout du bouton à la fin de la popup
+    popupText += `
+        <br>
+        <a href="${googleMapsUrl}" target="_blank" class="direction-btn">
+            🚀 Itinéraire
+        </a>
+    `;
+
+    // Gestion des boutons Edit/Delete pour les événements utilisateur
     if (isUserEvent && rawData) {
         if (!rawData.id) rawData.id = Date.now();
         marker.data = { ...rawData, lat: lat, lng: lng, id: rawData.id }; 
+        
         popupText += `
             <div class="popup-controls">
                 <button class="popup-btn btn-edit" onclick="editEvent(${rawData.id})">✏️ Edit</button>
@@ -66,7 +80,6 @@ function addMarker(lat, lng, icon, category, popupText, isUserEvent = false, raw
 }
 
 // --- DÉFINITION DES ICÔNES ---
-// On crée des styles d'icônes réutilisables (utilise ta fonction du point 2)
 var iconParty = createCustomIcon('🍻', 'bg-red');    // Pour boire/fête
 var iconFood  = createCustomIcon('🍔', 'bg-yellow'); // Pour manger
 var iconCoffee= createCustomIcon('☕', 'bg-blue');   // Pour étudier (cafés)
@@ -74,13 +87,14 @@ var iconPark  = createCustomIcon('🌳', 'bg-green');  // Parcs
 var iconEvent = createCustomIcon('🎉', 'bg-red');    // Rue de la soif
 var iconMarket= createCustomIcon('🛒', 'bg-yellow'); // Marché
 
-// --- AJOUT DES LIEUX (REAL LILLE DATA) ---
 
-// 🍻 BOIRE UN VERRE (Catégorie: events)
+// --- AJOUT DES LIEUX (LES VOILÀ DE RETOUR !) ---
+
+// 🍻 BOIRE UN VERRE
 addMarker(50.6322, 3.0550, iconEvent, 'events', 
-    "<b>Rue Solférino (Rue de la Soif)</b><br>Le QG des étudiants en soirée. Bars à gogo !");
+    "<b>Rue Solférino (Rue de la Soif)</b><br>Le QG des étudiants en soirée.");
 
-addMarker(50.6360, 3.0454, iconParty, 'events', 
+addMarker(50.6360, 3.0590, iconParty, 'events', 
     "<b>La Trav Bar</b><br>Ambiance étudiante conviviale, idéal avant de sortir.");
 
 addMarker(50.6405, 3.0600, iconParty, 'events', 
@@ -89,23 +103,23 @@ addMarker(50.6405, 3.0600, iconParty, 'events',
 addMarker(50.6373, 3.0614, iconParty, 'events', 
     "<b>Dernier Bar avant la Fin du Monde</b><br>Cocktails créatifs & culture Geek.");
 
-// 🍽️ MANGER (Catégorie: food)
+// 🍽️ MANGER
 addMarker(50.6366, 3.0637, iconFood, 'food', 
-    "<b>Café Joyeux</b><br>Cuisine solidaire et ambiance douce. Top pour le déj.");
+    "<b>Café Joyeux</b><br>Cuisine solidaire et ambiance douce.");
 
 addMarker(50.6420, 3.0580, iconFood, 'food', 
-    "<b>OHAMO</b><br>Bistro moderne, sain et relax après les cours.");
+    "<b>OHAMO</b><br>Bistro moderne, sain et relax.");
 
 addMarker(50.6393, 3.0645, iconFood, 'food', 
     "<b>Paddo Café</b><br>Le spot brunch incontournable.");
 
 addMarker(50.6349, 3.0455, iconFood, 'food', 
-    "<b>All Resto (Crous)</b><br>Prix étudiants imbattables pour le déjeuner.");
+    "<b>All Resto (Crous)</b><br>Prix étudiants imbattables.");
 
 addMarker(50.6272, 3.0515, iconMarket, 'food', 
-    "<b>Marché de Wazemmes</b><br>Mardi, Jeudi & Dimanche. Le moins cher pour tes courses !");
+    "<b>Marché de Wazemmes</b><br>Mardi, Jeudi & Dimanche. Le moins cher !");
 
-// ☕ ÉTUDIER / TRAVAILLER (Catégorie: study)
+// ☕ ÉTUDIER
 addMarker(50.6338, 3.0667, iconCoffee, 'study', 
     "<b>Coffee Makers</b><br>Le meilleur café pour bosser (Wifi top).");
 
@@ -118,12 +132,12 @@ addMarker(50.6335, 3.0570, iconCoffee, 'study',
 addMarker(50.6360, 3.0630, iconCoffee, 'study', 
     "<b>Columbus Café (Rihour)</b><br>Grandes tables, souvent rempli d'étudiants.");
 
-// 🌳 PARCS & DÉTENTE (Catégorie: study ou sport)
+// 🌳 PARCS
 addMarker(50.6258, 3.0665, iconPark, 'study', 
-    "<b>Parc Jean-Baptiste Lebas</b><br>Pique-nique et révisions sur l'herbe (quand il ne pleut pas).");
+    "<b>Parc Jean-Baptiste Lebas</b><br>Pique-nique et révisions sur l'herbe.");
 
 addMarker(50.6370, 3.0470, iconPark, 'study', 
-    "<b>Parc de la Citadelle (Vauban)</b><br>Le poumon vert pour courir ou chiller entre deux cours.");
+    "<b>Parc de la Citadelle (Vauban)</b><br>Le poumon vert pour courir ou chiller.");
 
 
 // --- 4. FILTRAGE ET ANIMATION "SLIDING PILL" ---
