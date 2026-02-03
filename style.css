@@ -447,7 +447,7 @@ nav {
     justify-content: center;
     align-items: center;
     /* Une petite bordure sombre pour que ça ressorte bien sur la carte sombre */
-    border: 3px solid var(--bg-color);
+    border: 1.9px solid var(--bg-color);
     box-shadow: 0 4px 10px rgba(0,0,0,0.4);
     position: relative;
     transition: transform 0.2s ease;
