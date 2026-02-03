@@ -493,6 +493,11 @@ nav {
     color: white;
 }
 
+.bg-pink {
+    background: linear-gradient(135deg, #F863E4, #F772E4);
+    color: white;
+}
+
 
 /* --- 7. PAGE GUIDES --- */
 
@@ -818,6 +823,23 @@ nav {
 
 .form-group input:focus, .form-group textarea:focus {
     border-color: var(--accent-color);
+}
+
+/* --- CORRECTION DU MENU DÉROULANT (Select) --- */
+
+/* 1. On s'assure que le champ principal est bien sombre */
+.form-group select {
+    background-color: rgba(255, 255, 255, 0.05); /* Fond vitré */
+    color: white;
+    cursor: pointer;
+}
+
+/* 2. C'EST ICI LA CORRECTION : Les options de la liste */
+.form-group select option {
+    /* On doit mettre une couleur opaque (le transparent ne marche pas sur les options) */
+    background-color: #1a1a1d; /* La même couleur que le fond de ta modale */
+    color: white;
+    padding: 10px;
 }
 
 .submit-btn {

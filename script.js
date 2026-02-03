@@ -313,6 +313,7 @@ form.addEventListener('submit', (e) => {
             if (type === 'food')  { emoji = '🍔'; colorClass = 'bg-yellow'; }
             if (type === 'study') { emoji = '📚'; colorClass = ''; }
             if (type === 'sport') { emoji = '⚽'; colorClass = 'bg-green'; }
+            if (type === 'activity') { emoji = '🎳'; colorClass = 'bg-pink'; }
 
             const newIcon = createCustomIcon(emoji, colorClass);
 
@@ -476,6 +477,7 @@ function loadUserEvents() {
             if (data.type === 'food')  { emoji = '🍔'; colorClass = 'bg-yellow'; }
             if (data.type === 'study') { emoji = '📚'; colorClass = ''; }
             if (data.type === 'sport') { emoji = '⚽'; colorClass = 'bg-green'; }
+            if (data.type === 'activity') { emoji = '🎳'; colorClass = 'bg-pink'; }
 
             const newIcon = createCustomIcon(emoji, colorClass);
             
