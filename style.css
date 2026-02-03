@@ -428,56 +428,70 @@ nav {
         .pin-3 { top: 30%; left: 70%; --accent-color: #00b894; }
 
 
-/* --- 6. LEAFLET CUSTOM MARKERS --- */
+/* --- 6. MARQUEURS CARTE (Style Dégradé Moderne) --- */
 
-/* Leaflet crée un wrapper autour de l'icône, on le rend transparent */
-.leaflet-marker-icon.custom-pin {
-    background: transparent;
-    border: none;
-}
-
-/* La forme du marqueur (goutte inversée) */
-.pin-marker {
-    width: 44px;
-    height: 44px;
-    border-radius: 50% 50% 0 50%; /* Forme de pointe */
-    background: var(--accent-color); /* Couleur par défaut (violet) */
-    transform: rotate(45deg); /* Rotation pour faire la pointe vers le bas */
+/* Le conteneur du marqueur (défini par Leaflet) */
+.custom-map-marker {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* Une petite bordure sombre pour que ça ressorte bien sur la carte sombre */
-    border: 1.9px solid var(--bg-color);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-    position: relative;
-    transition: transform 0.2s ease;
+    /* On enlève le fond par défaut si jamais il y en avait un */
+    background: transparent !important;
+    border: none !important;
 }
 
-/* Effet au survol du marqueur */
-.pin-marker:hover {
-   transform: rotate(45deg) scale(1.1) translateY(-3px);
-   z-index: 1000;
+/* La "bulle" colorée à l'intérieur */
+.marker-pin {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%; /* Rond parfait */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* AMÉLIORATIONS VISUELLES : */
+    font-size: 1.4rem; /* Emoji un peu plus gros */
+    border: 3px solid white; /* Bordure blanche nette pour le contraste */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3); /* Belle ombre portée pour le relief */
+    transition: transform 0.2s ease-in-out; /* Petite animation au survol */
 }
 
-/* L'emoji à l'intérieur */
-.pin-icon {
-    /* On annule la rotation de 45deg pour que l'emoji soit droit, 
-       et on le centre parfaitement */
-    transform: rotate(-45deg);
-    font-size: 1.4rem;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) rotate(-45deg);
-    line-height: 1;
+/* Effet "pop" quand on passe la souris sur un marqueur sur PC */
+.custom-map-marker:hover .marker-pin {
+    transform: scale(1.15); /* Grossit légèrement */
+    box-shadow: 0 6px 15px rgba(0,0,0,0.4);
 }
 
-/* Classes utilitaires pour changer la couleur facilement */
-.bg-purple { background-color: #6c5ce7 !important; }
-.bg-red    { background-color: #ff7675 !important; }
-.bg-green  { background-color: #00b894 !important; }
-.bg-blue   { background-color: #0984e3 !important; }
-.bg-yellow { background-color: #fdcb6e !important; }
+/* --- COULEURS EN DÉGRADÉ (Gradients) --- */
+/* L'angle 135deg crée un dégradé du haut-gauche vers le bas-droite */
+
+/* 🍻🎉 Events (Rouge/Orange vibrant) */
+.bg-red {
+    background: linear-gradient(135deg, #ff9f43, #ff6b6b);
+}
+
+/* 📚☕ Study (Bleu/Cyan apaisant) */
+.bg-blue {
+    background: linear-gradient(135deg, #00d2d3, #54a0ff);
+}
+
+/* 🍔🛒 Food (Jaune/Or appétissant) */
+.bg-yellow {
+    background: linear-gradient(135deg, #fef79e, #feca57);
+    color: #2d3436; /* Emoji foncé pour contraste sur fond jaune clair */
+}
+
+/* 🌳 Sport/Parcs (Vert frais) */
+.bg-green {
+    background: linear-gradient(135deg, #55efc4, #1dd1a1);
+    color: white;
+}
+
+/* 🤝 Partners (Violet premium, optionnel si tu l'utilises plus tard) */
+.bg-purple {
+    background: linear-gradient(135deg, #a55eea, #4b7bec);
+    color: white;
+}
 
 
 /* --- 7. PAGE GUIDES --- */
