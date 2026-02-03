@@ -35,12 +35,13 @@ function createCustomIcon(emoji, colorClass) {
 }
 
 
-// --- 3. GESTION DES MARQUEURS ---
+/// --- 3. GESTION DES MARQUEURS ---
 var allMarkers = [];
 
 // Variable globale pour savoir si on modifie un marqueur existant
 let currentEditingMarker = null;
 
+// Fonction d'ajout
 function addMarker(lat, lng, icon, category, popupText, isUserEvent = false, rawData = null) {
     var marker = L.marker([lat, lng], {icon: icon});
     
@@ -49,18 +50,8 @@ function addMarker(lat, lng, icon, category, popupText, isUserEvent = false, raw
     marker.searchText = popupText.replace(/<[^>]*>?/gm, '').toLowerCase();
 
     if (isUserEvent && rawData) {
-        // 1. GÉNÉRATION D'ID UNIQUE
-        // Si l'événement a déjà un ID (chargé depuis la mémoire), on le garde.
-        // Sinon, on en crée un nouveau avec Date.now() (c'est un chiffre unique).
-        if (!rawData.id) {
-            rawData.id = Date.now();
-        }
-        
-        // On stocke tout dans le marqueur
+        if (!rawData.id) rawData.id = Date.now();
         marker.data = { ...rawData, lat: lat, lng: lng, id: rawData.id }; 
-        
-        // 2. BOUTONS AVEC L'ID UNIQUE
-        // Note : On passe rawData.id dans la fonction deleteEvent
         popupText += `
             <div class="popup-controls">
                 <button class="popup-btn btn-edit" onclick="editEvent(${rawData.id})">✏️ Edit</button>
@@ -74,21 +65,67 @@ function addMarker(lat, lng, icon, category, popupText, isUserEvent = false, raw
     allMarkers.push(marker);
 }
 
-// Création des marqueurs
-var iconCafe = createCustomIcon('☕', ''); 
-addMarker(50.6386, 3.0602, iconCafe, 'food', "<b>Elizabeth's Tea Room</b><br>Cozy cakes & tea.");
+// --- DÉFINITION DES ICÔNES ---
+// On crée des styles d'icônes réutilisables (utilise ta fonction du point 2)
+var iconParty = createCustomIcon('🍻', 'bg-red');    // Pour boire/fête
+var iconFood  = createCustomIcon('🍔', 'bg-yellow'); // Pour manger
+var iconCoffee= createCustomIcon('☕', 'bg-blue');   // Pour étudier (cafés)
+var iconPark  = createCustomIcon('🌳', 'bg-green');  // Parcs
+var iconEvent = createCustomIcon('🎉', 'bg-red');    // Rue de la soif
+var iconMarket= createCustomIcon('🛒', 'bg-yellow'); // Marché
 
-var iconParty = createCustomIcon('🍺', 'bg-red');
-addMarker(50.6373, 3.0614, iconParty, 'events', "<b>Dernier Bar</b><br>Geek culture & beers.");
+// --- AJOUT DES LIEUX (REAL LILLE DATA) ---
 
-var iconPark = createCustomIcon('🌳', 'bg-green');
-addMarker(50.6383, 3.0480, iconPark, 'study', "<b>La Citadelle</b><br>Perfect for reading on the grass.");
+// 🍻 BOIRE UN VERRE (Catégorie: events)
+addMarker(50.6322, 3.0550, iconEvent, 'events', 
+    "<b>Rue Solférino (Rue de la Soif)</b><br>Le QG des étudiants en soirée. Bars à gogo !");
 
-var iconPartner = createCustomIcon('🤝', 'bg-blue');
-addMarker(50.6369, 3.0634, iconPartner, 'partners', "<b>Student Welcome Desk</b><br>Help & paperwork.");
+addMarker(50.6360, 3.0454, iconParty, 'events', 
+    "<b>La Trav Bar</b><br>Ambiance étudiante conviviale, idéal avant de sortir.");
+
+addMarker(50.6405, 3.0600, iconParty, 'events', 
+    "<b>La Capsule</b><br>Le temple de la bière artisanale. Bonne ambiance.");
+
+addMarker(50.6373, 3.0614, iconParty, 'events', 
+    "<b>Dernier Bar avant la Fin du Monde</b><br>Cocktails créatifs & culture Geek.");
+
+// 🍽️ MANGER (Catégorie: food)
+addMarker(50.6366, 3.0637, iconFood, 'food', 
+    "<b>Café Joyeux</b><br>Cuisine solidaire et ambiance douce. Top pour le déj.");
+
+addMarker(50.6420, 3.0580, iconFood, 'food', 
+    "<b>OHAMO</b><br>Bistro moderne, sain et relax après les cours.");
+
+addMarker(50.6393, 3.0645, iconFood, 'food', 
+    "<b>Paddo Café</b><br>Le spot brunch incontournable.");
+
+addMarker(50.6349, 3.0455, iconFood, 'food', 
+    "<b>All Resto (Crous)</b><br>Prix étudiants imbattables pour le déjeuner.");
+
+addMarker(50.6272, 3.0515, iconMarket, 'food', 
+    "<b>Marché de Wazemmes</b><br>Mardi, Jeudi & Dimanche. Le moins cher pour tes courses !");
+
+// ☕ ÉTUDIER / TRAVAILLER (Catégorie: study)
+addMarker(50.6338, 3.0667, iconCoffee, 'study', 
+    "<b>Coffee Makers</b><br>Le meilleur café pour bosser (Wifi top).");
+
+addMarker(50.6392, 3.0595, iconCoffee, 'study', 
+    "<b>CUP Tiny Café</b><br>Petit, cosy, parfait pour une session focus.");
+
+addMarker(50.6335, 3.0570, iconCoffee, 'study', 
+    "<b>Mü Café</b><br>Ambiance relax pour réviser sans stress.");
+
+addMarker(50.6360, 3.0630, iconCoffee, 'study', 
+    "<b>Columbus Café (Rihour)</b><br>Grandes tables, souvent rempli d'étudiants.");
+
+// 🌳 PARCS & DÉTENTE (Catégorie: study ou sport)
+addMarker(50.6258, 3.0665, iconPark, 'study', 
+    "<b>Parc Jean-Baptiste Lebas</b><br>Pique-nique et révisions sur l'herbe (quand il ne pleut pas).");
+
+addMarker(50.6370, 3.0470, iconPark, 'study', 
+    "<b>Parc de la Citadelle (Vauban)</b><br>Le poumon vert pour courir ou chiller entre deux cours.");
 
 
-// --- 4. FILTRAGE PAR CATÉGORIE (Sidebar) ---
 // --- 4. FILTRAGE ET ANIMATION "SLIDING PILL" ---
 
 // Fonction pour bouger la pilule violette
@@ -155,24 +192,40 @@ window.filterMap = function(category) {
 };
 
 
-// --- 5. NOUVEAU : FILTRAGE PAR RECHERCHE (Search Bar) ---
+// --- 5. FILTRAGE PAR RECHERCHE (Search Bar) ---
 const searchInput = document.getElementById('search-input');
 
 searchInput.addEventListener('input', (e) => {
     // Ce que l'utilisateur tape (en minuscule)
     const term = e.target.value.toLowerCase();
+    
+    // On récupère les nouveaux boutons pour gérer leur état visuel
+    const filterOptions = document.querySelectorAll('.filter-option');
+    const allBtn = document.getElementById('filter-all');
 
-    // Si on cherche, on désactive visuellement les filtres de catégorie
+    // GESTION VISUELLE DES BOUTONS
     if(term.length > 0) {
-        filterButtons.forEach(b => b.classList.remove('active'));
+        // Si on cherche, on enlève le violet de tous les filtres
+        filterOptions.forEach(b => b.classList.remove('active'));
+        // On cache la pilule violette temporairement (optionnel, ou on la met sur 0)
+        const highlighter = document.getElementById('filter-highlighter');
+        if(highlighter) highlighter.style.width = '0px';
+
     } else {
-        // Si on efface tout, on remet "All" actif par défaut
-        filterButtons[0].classList.add('active');
+        // Si on efface la recherche, on remet "All" actif par défaut
+        if(allBtn) {
+            allBtn.classList.add('active');
+            // IMPORTANT : On remet la pilule violette sur "All"
+            if(typeof moveHighlighter === "function") {
+                moveHighlighter(allBtn);
+            }
+        }
     }
 
+    // LOGIQUE DE RECHERCHE
     allMarkers.forEach(marker => {
-        // Est-ce que le texte du marqueur contient ce qu'on tape ?
-        if (marker.searchText.includes(term)) {
+        // On vérifie si marker.searchText existe avant de chercher dedans
+        if (marker.searchText && marker.searchText.includes(term)) {
             if (!map.hasLayer(marker)) map.addLayer(marker);
         } else {
             if (map.hasLayer(marker)) map.removeLayer(marker);

@@ -34,7 +34,7 @@ nav {
 
 .logo { 
     font-weight: 700; 
-    font-size: 1.6rem; 
+    font-size: 2.5rem; 
     letter-spacing: -0.5px;
     text-decoration: none;
     color: var(--text-main);
@@ -245,7 +245,7 @@ nav {
         gap: 10px;
     }
     
-    .filter-option:hover { color: white !important; }
+    .filter-option:hover { color: darkgrey !important; }
 
     /* --- LE SECRET : On ré-affiche le texte sur PC --- */
     .filter-text {
