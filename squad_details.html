@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Squad Details - CityMate</title>
+    <link rel="stylesheet" href="style-main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Styles spécifiques pour cette page car style.css est générique */
+        body {
+            overflow-y: auto !important;
+        }
+        .squad-hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 80px 20px 40px;
+            /* Plus d'espace en haut */
+            color: white;
+            text-align: center;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            position: relative;
+        }
+
+        .back-nav {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            color: white;
+            text-decoration: none;
+            backdrop-filter: blur(5px);
+        }
+
+        .squad-big-icon {
+            font-size: 4rem;
+            background: #1a1a1d;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .squad-stats {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .stat-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+
+        .details-container {
+            max-width: 800px;
+            margin: -30px auto 0;
+            padding: 0 20px 100px;
+            /* Marge en bas pour la nav mobile */
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-card {
+            background: #1a1a1d;
+            color: white;
+            padding: 24px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section-card h3 {
+            color: white;
+        }
+
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .member-item {
+            text-align: center;
+        }
+
+        .member-avatar {
+            width: 50px;
+            height: 50px;
+            background: #333;
+            border-radius: 50%;
+            margin: 0 auto 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #ddd;
+        }
+
+        .event-mini-card {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .event-mini-card h4 {
+            color: white;
+            margin-bottom: 4px;
+        }
+
+        .event-mini-card p {
+            color: #aaa;
+        }
+
+        .date-box {
+            text-align: center;
+            background: #2d2d2d;
+            padding: 8px 12px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .date-day {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .date-month {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: #aaa;
+        }
+
+        .join-action-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 15px;
+            background: var(--accent-color, #6c5ce7);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .join-action-btn:active {
+            transform: scale(0.98);
+        }
+
+        .join-action-btn.joined {
+            background: transparent;
+            color: var(--success, #00b894);
+            border: 2px solid var(--success, #00b894);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="squad-hero" id="hero-section">
+        <a href="community.html" class="back-nav">← Back</a>
+
+        <div class="squad-big-icon" id="squad-icon">🔥</div>
+        <h1 id="squad-name">Loading...</h1>
+        <p id="squad-desc">A great community to join!</p>
+
+        <div class="squad-stats">
+            <span class="stat-badge" id="squad-visibility">🌍 Public</span>
+            <span class="stat-badge" id="member-count">0 Members</span>
+            <span class="stat-badge">Created by Alex</span>
+        </div>
+    </header>
+
+    <div class="details-container">
+
+        <div class="section-card">
+            <h3>📅 Upcoming Events</h3>
+            <div class="event-list">
+                <!-- Exemple d'événement -->
+                <div class="event-mini-card">
+                    <div class="date-box">
+                        <div class="date-day">12</div>
+                        <div class="date-month">OCT</div>
+                    </div>
+                    <div>
+                        <h4>Weekly Meetup</h4>
+                        <p class="text-sm">📍 Gare St Sauveur • 18:00</p>
+                    </div>
+                </div>
+                <!-- ... -->
+                <p class="text-center text-sm" style="color: #888; margin-top: 10px;">
+                    <a href="#" onclick="alert('Demo feature!')">+ Propose an event</a>
+                </p>
+            </div>
+        </div>
+
+        <div class="section-card">
+            <h3>👥 Members</h3>
+            <div class="members-grid" id="members-list">
+                <!-- Membres générés par JS -->
+                <div class="member-item">
+                    <div class="member-avatar" style="background: #a29bfe; color: white;">A</div>
+                    <span class="text-xs">Alex</span>
+                </div>
+                <div class="member-item">
+                    <div class="member-avatar">L</div>
+                    <span class="text-xs">Lena</span>
+                </div>
+                <div class="member-item">
+                    <div class="member-avatar">M</div>
+                    <span class="text-xs">Marc</span>
+                </div>
+                <div class="member-item">
+                    <div class="member-avatar">+12</div>
+                    <span class="text-xs">More</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="admin-section" class="section-card" style="display: none; border-color: var(--accent-color);">
+            <h3 style="color: var(--accent-color);">🔔 Incoming Requests</h3>
+            <div class="requests-list" id="requests-list">
+                <div class="request-item" id="req-1">
+                    <div class="request-user">
+                        <div class="member-avatar" style="background:#ff7675; width:40px; height:40px; margin:0; display:flex;">S</div>
+                        <span><strong>Sarah J.</strong> wants to join</span>
+                    </div>
+                    <div class="request-actions">
+                        <button class="btn-accept" onclick="acceptRequest('req-1')">Accept</button>
+                        <button class="btn-reject" onclick="rejectRequest('req-1')">Reject</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button id="main-join-btn" class="join-action-btn">Join Squad</button>
+
+    </div>
+
+    <!-- Script pour charger les données dynamiquement -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Récupérer les paramètre de l'URL (ex: squad_details.html?name=Museum%20Lovers)
+            const params = new URLSearchParams(window.location.search);
+            const squadName = params.get('name');
+            const squadId = params.get('id'); // Pour les squads créées par l'user
+
+            // Données "Hardcodées" pour la démo des squads par défaut
+            const defaultSquads = {
+                'Museum Lovers 🎨': {
+                    icon: '🎨',
+                    desc: 'For those who love art, history and chilling in museums on weekends.',
+                    count: 128,
+                    color: 'bg-purple',
+                    visibility: 'public'
+                },
+                'Hikers of Lille': {
+                    icon: '🥾',
+                    desc: 'Walking around the Citadel and exploring nearby nature.',
+                    count: 85,
+                    color: 'bg-green',
+                    visibility: 'public'
+                },
+                'Gaming Night': {
+                    icon: '🎮',
+                    desc: 'Weekly video game sessions and board game nights.',
+                    count: 240,
+                    color: 'bg-red',
+                    visibility: 'private'
+                }
+            };
+
+            let squadData = null;
+
+            // 2. Chercher les données
+            if (squadId) {
+                // Si on a un ID, on cherche dans le localStorage (squads créées par l'user)
+                const savedSquads = JSON.parse(localStorage.getItem('my_squads') || '[]');
+                // Attention squad.id est stocké en nombre, squadId de l'url est string
+                squadData = savedSquads.find(s => s.id == squadId);
+            }
+
+            // Si pas trouvé par ID, on essaie par Nom (pour celles par défaut)
+            if (!squadData && squadName) {
+                // On essaie de trouver une correspondance approximative
+                const key = Object.keys(defaultSquads).find(k => k.includes(squadName));
+                if (key) {
+                    squadData = {
+                        name: key,
+                        ...defaultSquads[key]
+                    };
+                }
+            }
+
+            // 3. Afficher les données
+            if (squadData) {
+                document.getElementById('squad-name').textContent = squadData.name || squadName;
+                document.getElementById('squad-desc').textContent = squadData.desc || 'A community created by users.';
+                document.getElementById('squad-icon').textContent = squadData.icon || '👥';
+                document.getElementById('member-count').textContent = (squadData.count || squadData.members || 1) + ' Members';
+
+                // Display visibility
+                const visBadge = document.getElementById('squad-visibility');
+                if (squadData.visibility === 'private') {
+                    visBadge.innerHTML = '🔒 Private';
+                } else {
+                    visBadge.innerHTML = '🌍 Public';
+                }
+
+                // Show Admin Section if owner & private
+                if (squadData.isUserCreated && squadData.visibility === 'private') {
+                    document.getElementById('admin-section').style.display = 'block';
+                    document.getElementById('main-join-btn').style.display = 'none'; // Admin doesn't need to join
+                }
+
+                // Gestion de la couleur de fond
+                const hero = document.getElementById('hero-section');
+                // On mappe les classes bg-xxx vers de vraies couleurs CSS si besoin
+                // Ici on laisse le dégradé par défaut ou on pourrait le changer
+                if (squadData.colorClass === 'bg-purple') hero.style.background = 'linear-gradient(135deg, #a29bfe, #6c5ce7)';
+                if (squadData.colorClass === 'bg-green') hero.style.background = 'linear-gradient(135deg, #55efc4, #00b894)';
+                if (squadData.colorClass === 'bg-red') hero.style.background = 'linear-gradient(135deg, #ff7675, #d63031)';
+
+            } else {
+                // Fallback si rien trouvé
+                document.getElementById('squad-name').textContent = 'Squad Not Found';
+            }
+
+            // 4. Gestion du bouton Join
+            const btn = document.getElementById('main-join-btn');
+            let joinState = 'none';
+
+            if (squadData && squadData.visibility === 'private' && !squadData.isUserCreated) {
+                btn.textContent = 'Request to Join';
+            }
+
+            btn.addEventListener('click', () => {
+                if (squadData && squadData.visibility === 'private' && !squadData.isUserCreated) {
+                    if (joinState === 'none') {
+                        joinState = 'pending';
+                        btn.textContent = 'Pending Request ⏳';
+                        btn.classList.add('btn-pending');
+                        btn.classList.remove('joined');
+                        btn.style.background = 'transparent';
+                    } else {
+                        joinState = 'none';
+                        btn.textContent = 'Request to Join';
+                        btn.classList.remove('btn-pending');
+                        btn.style.background = 'var(--accent-color)';
+                        btn.style.color = 'white';
+                        btn.style.borderColor = 'transparent';
+                    }
+                } else {
+                    if (joinState === 'none') {
+                        joinState = 'joined';
+                        btn.textContent = 'Joined ✓';
+                        btn.classList.add('joined');
+                    } else {
+                        joinState = 'none';
+                        btn.textContent = 'Join Squad';
+                        btn.classList.remove('joined');
+                    }
+                }
+            });
+
+            // 5. Admin Actions
+            window.acceptRequest = function(reqId) {
+                document.getElementById(reqId).style.display = 'none';
+                if (squadData) {
+                    let currentCount = parseInt(document.getElementById('member-count').textContent) || 1;
+                    currentCount++;
+                    document.getElementById('member-count').textContent = currentCount + ' Members';
+                    alert('Request Accepted! Sarah joined your squad.');
+                    
+                    if(squadId) {
+                        const savedSquads = JSON.parse(localStorage.getItem('my_squads') || '[]');
+                        const idx = savedSquads.findIndex(s => s.id == squadId);
+                        if(idx > -1) {
+                            savedSquads[idx].members = currentCount;
+                            localStorage.setItem('my_squads', JSON.stringify(savedSquads));
+                        }
+                    }
+                }
+            };
+
+            window.rejectRequest = function(reqId) {
+                document.getElementById(reqId).style.display = 'none';
+            };
+        });
+    </script>
+
+</body>
+
+</html>

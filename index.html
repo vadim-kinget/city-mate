@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,18 +8,20 @@
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#6c5ce7">
     <link rel="apple-touch-icon" href="icon.png">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%236c5ce7'/><text x='50' y='65' font-family='Arial, sans-serif' font-weight='bold' font-size='50' fill='white' text-anchor='middle'>CM</text></svg>">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%236c5ce7'/><text x='50' y='65' font-family='Arial, sans-serif' font-weight='bold' font-size='50' fill='white' text-anchor='middle'>CM</text></svg>">
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <link rel="stylesheet" href="style-main.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
+
 <body>
 
     <nav>
         <a href="index.html" class="logo">City<span>Mate</span></a>
-        
+
         <div class="nav-links">
             <a href="index.html" class="active">
                 <span class="nav-icon">🗺️</span>
@@ -28,17 +31,14 @@
                 <span class="nav-icon">📖</span>
                 <span class="nav-text">Guides</span>
             </a>
-            <a href="deals.html">
-                <span class="nav-icon">🏷️</span>
-                <span class="nav-text">Deals</span>
-            </a>
+
             <a href="community.html">
                 <span class="nav-icon">👥</span>
                 <span class="nav-text">Community</span>
             </a>
         </div>
 
-        <div class="nav-right" style="display: flex; align-items: center; gap: 15px;">
+        <div class="nav-right">
             <button id="chat-toggle" class="chat-btn">
                 💬 <span class="notif-badge">2</span>
             </button>
@@ -51,7 +51,7 @@
     </nav>
 
     <div class="main-container">
-        
+
         <div class="filter-wrapper">
             <div class="filter-group">
                 <div id="filter-highlighter"></div>
@@ -59,19 +59,19 @@
                 <button class="filter-option active" onclick="filterMap('all')" id="filter-all">
                     🔍 <span class="filter-text">All</span>
                 </button>
-                
+
                 <button class="filter-option" onclick="filterMap('food')">
                     🍔 <span class="filter-text">Food</span>
                 </button>
-                
+
                 <button class="filter-option" onclick="filterMap('events')">
                     🎉 <span class="filter-text">Events</span>
                 </button>
-                
+
                 <button class="filter-option" onclick="filterMap('study')">
                     📚 <span class="filter-text">Study</span>
                 </button>
-                
+
                 <button class="filter-option" onclick="filterMap('partners')">
                     🤝 <span class="filter-text">Partners</span>
                 </button>
@@ -79,13 +79,14 @@
         </div>
 
         <main class="map-wrapper">
-            
+
             <div id="map"></div>
 
             <button id="locate-btn" class="geo-btn" title="Ma position">
-               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
-                   <path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3A8.994 8.994 0 0 0 13 3.06V1h-2v2.06A8.994 8.994 0 0 0 3.06 11H1v2h2.06A8.994 8.994 0 0 0 11 20.94V23h2v-2.06A8.994 8.994 0 0 0 20.94 13H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/>
-               </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                    <path
+                        d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3A8.994 8.994 0 0 0 13 3.06V1h-2v2.06A8.994 8.994 0 0 0 3.06 11H1v2h2.06A8.994 8.994 0 0 0 11 20.94V23h2v-2.06A8.994 8.994 0 0 0 20.94 13H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z" />
+                </svg>
             </button>
 
             <div class="search-bar">
@@ -103,18 +104,29 @@
                 <h2>✨ Host an Activity</h2>
                 <button id="close-modal" class="close-btn">&times;</button>
             </div>
-            
+
             <form id="activity-form">
                 <div class="form-group">
                     <label>Event Name</label>
                     <input type="text" id="event-name" placeholder="Ex: English Conversation Club" required>
                 </div>
 
-                <div class="form-group" style="flex: 2;"> <label>Street Address</label>
+                <div class="form-group flex-2"> <label>Street Address</label>
                     <input type="text" id="event-address" placeholder="10 Rue de la Paix" required>
                 </div>
-                <div class="form-group" style="flex: 1;"> <label>City</label>
+                <div class="form-group flex-1"> <label>City</label>
                     <input type="text" id="event-city" placeholder="Paris" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group flex-1">
+                        <label>Date</label>
+                        <input type="date" id="event-date" required>
+                    </div>
+                    <div class="form-group flex-1">
+                        <label>Time</label>
+                        <input type="time" id="event-time" required>
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -124,7 +136,7 @@
                         <option value="food">🍔 Food</option>
                         <option value="study">📚 Study Session</option>
                         <option value="sport">⚽ Sport</option>
-                        <option value="activity">🎳  Activity</option>
+                        <option value="activity">🎳 Activity</option>
                     </select>
                 </div>
 
@@ -139,85 +151,86 @@
     </div>
 
 
-<div id="chat-drawer" class="chat-drawer">
-    
-    <div class="chat-header">
-        <h3>Messages</h3>
-        <button id="close-chat" class="close-btn">&times;</button>
+    <div id="chat-drawer" class="chat-drawer">
+
+        <div class="chat-header">
+            <h3>Messages</h3>
+            <button id="close-chat" class="close-btn">&times;</button>
+        </div>
+
+        <div id="chat-list-view" class="chat-view active">
+
+            <div class="chat-tabs">
+                <span class="chat-tab active">All</span>
+                <span class="chat-tab">Groups</span>
+                <span class="chat-tab">Private</span>
+            </div>
+
+            <div class="conversations-list">
+
+                <div class="convo-item" onclick="openConversation('Museum Lovers 🎨', true)">
+                    <div class="convo-avatar bg-purple">🎨</div>
+                    <div class="convo-info">
+                        <h4>Museum Lovers</h4>
+                        <p>Lena: Anyone going to Palais des B...</p>
+                    </div>
+                    <span class="time">2m</span>
+                </div>
+
+                <div class="convo-item" onclick="openConversation('Sarah J. 🇬🇧', false)">
+                    <div class="convo-avatar avatar-red">SJ</div>
+                    <div class="convo-info">
+                        <h4>Sarah J.</h4>
+                        <p>That sounds great! See you there.</p>
+                    </div>
+                    <span class="time">1h</span>
+                </div>
+
+                <div class="convo-item unread">
+                    <div class="convo-avatar avatar-blue">MK</div>
+                    <div class="convo-info">
+                        <h4>Mehdi K.</h4>
+                        <p>Do you know where the library is?</p>
+                    </div>
+                    <span class="time">3h</span>
+                    <div class="unread-dot"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="chat-conversation-view" class="chat-view">
+            <div class="active-chat-header">
+                <button class="back-btn" onclick="closeConversation()">←</button>
+                <h4 id="current-chat-name">User Name</h4>
+            </div>
+
+            <div class="messages-container">
+                <div class="message received">
+                    <p>Hey! Are you coming to the event tonight?</p>
+                    <span class="msg-time">10:30 AM</span>
+                </div>
+
+                <div class="message sent">
+                    <p>Yes absolutely! I'm bringing a friend.</p>
+                    <span class="msg-time">10:32 AM</span>
+                </div>
+
+                <div class="message received">
+                    <p>Awesome, see you at the Gare St Sauveur! 🚂</p>
+                    <span class="msg-time">10:33 AM</span>
+                </div>
+            </div>
+
+            <div class="chat-input-area">
+                <input type="text" placeholder="Type a message..." id="msg-input">
+                <button class="send-btn">➤</button>
+            </div>
+        </div>
+
     </div>
 
-    <div id="chat-list-view" class="chat-view active">
-        
-        <div class="chat-tabs">
-            <span class="chat-tab active">All</span>
-            <span class="chat-tab">Groups</span>
-            <span class="chat-tab">Private</span>
-        </div>
-
-        <div class="conversations-list">
-            
-            <div class="convo-item" onclick="openConversation('Museum Lovers 🎨', true)">
-                <div class="convo-avatar bg-purple">🎨</div>
-                <div class="convo-info">
-                    <h4>Museum Lovers</h4>
-                    <p>Lena: Anyone going to Palais des B...</p>
-                </div>
-                <span class="time">2m</span>
-            </div>
-
-            <div class="convo-item" onclick="openConversation('Sarah J. 🇬🇧', false)">
-                <div class="convo-avatar" style="background: #ff7675;">SJ</div>
-                <div class="convo-info">
-                    <h4>Sarah J.</h4>
-                    <p>That sounds great! See you there.</p>
-                </div>
-                <span class="time">1h</span>
-            </div>
-
-             <div class="convo-item unread">
-                <div class="convo-avatar" style="background: #0984e3;">MK</div>
-                <div class="convo-info">
-                    <h4>Mehdi K.</h4>
-                    <p>Do you know where the library is?</p>
-                </div>
-                <span class="time">3h</span>
-                <div class="unread-dot"></div>
-            </div>
-        </div>
-    </div>
-
-    <div id="chat-conversation-view" class="chat-view">
-        <div class="active-chat-header">
-            <button class="back-btn" onclick="closeConversation()">←</button>
-            <h4 id="current-chat-name">User Name</h4>
-        </div>
-
-        <div class="messages-container">
-            <div class="message received">
-                <p>Hey! Are you coming to the event tonight?</p>
-                <span class="msg-time">10:30 AM</span>
-            </div>
-
-            <div class="message sent">
-                <p>Yes absolutely! I'm bringing a friend.</p>
-                <span class="msg-time">10:32 AM</span>
-            </div>
-            
-            <div class="message received">
-                <p>Awesome, see you at the Gare St Sauveur! 🚂</p>
-                <span class="msg-time">10:33 AM</span>
-            </div>
-        </div>
-
-        <div class="chat-input-area">
-            <input type="text" placeholder="Type a message..." id="msg-input">
-            <button class="send-btn">➤</button>
-        </div>
-    </div>
-
-</div>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 
 </body>
+
 </html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,11 +8,90 @@
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#6c5ce7">
     <link rel="apple-touch-icon" href="icon.png">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%236c5ce7'/><text x='50' y='65' font-family='Arial, sans-serif' font-weight='bold' font-size='50' fill='white' text-anchor='middle'>CM</text></svg>">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%236c5ce7'/><text x='50' y='65' font-family='Arial, sans-serif' font-weight='bold' font-size='50' fill='white' text-anchor='middle'>CM</text></svg>">
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style-main.css">
+    <style>
+        /* FAILSAFE CSS - Injected to ensure Deals Render */
+        .coupon-card {
+            display: flex !important;
+            flex-direction: column;
+            background: #1a1a1d;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            overflow: visible !important;
+            /* Allow content to spill if constrained */
+            min-height: auto;
+        }
+
+        .coupon-visual {
+            display: flex !important;
+            flex-direction: column;
+            padding: 20px;
+            gap: 10px;
+        }
+
+        .coupon-header {
+            display: flex !important;
+            justify-content: space-between !important;
+            width: 100%;
+        }
+
+        .coupon-content {
+            display: block !important;
+            margin-top: 10px;
+            color: white !important;
+        }
+
+        .coupon-content h3 {
+            font-size: 1.2rem;
+            color: white !important;
+            margin: 0 0 5px 0;
+        }
+
+        .coupon-content p {
+            color: #aaa !important;
+            font-size: 0.9rem;
+        }
+
+        /* Desktop Override */
+        @media (min-width: 1024px) {
+            .coupon-card {
+                flex-direction: row !important;
+                min-height: 180px;
+            }
+
+            .coupon-visual {
+                flex-direction: row !important;
+                align-items: center;
+                flex: 1;
+            }
+
+            .coupon-header {
+                width: auto !important;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .coupon-content {
+                margin-top: 0;
+                margin-left: 20px;
+            }
+
+            .coupon-action {
+                width: 200px;
+                display: flex !important;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                background: #101012;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
     <nav>
@@ -24,18 +104,15 @@
                 <span class="nav-icon">📖</span>
                 <span class="nav-text">Guides</span>
             </a>
-            <a href="deals.html" class="active">
-                <span class="nav-icon">🏷️</span>
-                <span class="nav-text">Deals</span>
-            </a>
+
             <a href="community.html">
                 <span class="nav-icon">👥</span>
                 <span class="nav-text">Community</span>
             </a>
         </div>
 
-            <div class="nav-right" style="display: flex; align-items: center; gap: 15px;">
-        
+        <div class="nav-right">
+
             <button id="chat-toggle" class="chat-btn">
                 💬 <span class="notif-badge">2</span>
             </button>
@@ -49,207 +126,347 @@
     </nav>
 
     <div class="deals-container">
-        
+
         <header class="deals-header">
             <h1>Student Perks 🏷️</h1>
             <p>Exclusive discounts around Lille just for you.</p>
         </header>
 
         <div class="deals-grid">
-            
-            <div class="deal-ticket">
-                <div class="deal-top">
-                    <div class="brand-logo bg-red">🍔</div>
-                    <div class="deal-info">
-                        <span class="discount">-20% OFF</span>
-                        <h3>Big Fernand</h3>
-                        <p>On all "Little Formule" menus between 12pm and 2pm.</p>
-                    </div>
-                </div>
-                <div class="deal-bottom">
-                    <div class="dashed-line"></div>
-                    <button class="code-btn" data-code="YUMMY20">Show Code</button>
-                </div>
-            </div>
 
-            <div class="deal-ticket">
-                <div class="deal-top">
-                    <div class="brand-logo bg-purple">🎬</div>
-                    <div class="deal-info">
-                        <span class="discount">1 Place Bought = 1 Free</span>
-                        <h3>UGC Ciné Cité</h3>
-                        <p>Valid on Tuesday nights only. Bring a friend!</p>
-                    </div>
-                </div>
-                <div class="deal-bottom">
-                    <div class="dashed-line"></div>
-                    <button class="code-btn" data-code="MOVIENIGHT">Show Code</button>        
-                </div>                
-            </div>
-
-            <div class="deal-ticket">
-                <div class="deal-top">
-                    <div class="brand-logo bg-yellow">☕</div>
-                    <div class="deal-info">
-                        <span class="discount">Free Cookie</span>
-                        <h3>Notting Hill Coffee</h3>
-                        <p>Get a free cookie for any XL Drink purchased.</p>
-                    </div>
-                </div>
-                <div class="deal-bottom">
-                    <div class="dashed-line"></div>
-                    <button class="code-btn" data-code="COOKIE4U">Show Code</button>
-                </div>
-            </div>
-
-            <div class="deal-ticket">
-                <div class="deal-top">
-                    <div class="brand-logo bg-green">🌍</div>
-                    <div class="deal-info">
-                        <span class="discount">-15% Voucher</span>
-                        <h3>FlixBus</h3>
-                        <p>Valid on all rides from/to Lille Europe station.</p>
-                    </div>
-                </div>
-                <div class="deal-bottom">
-                    <div class="dashed-line"></div>
-                    <button class="code-btn" data-code="TRAVEL26">Show Code</button>
-                </div>
-            </div>
-
-         </div> 
-    </div>
-<div id="chat-drawer" class="chat-drawer">
-    
-    <div class="chat-header">
-        <h3>Messages</h3>
-        <button id="close-chat" class="close-btn">&times;</button>
-    </div>
-
-    <div id="chat-list-view" class="chat-view active">
-        
-        <div class="chat-tabs">
-            <span class="chat-tab active">All</span>
-            <span class="chat-tab">Groups</span>
-            <span class="chat-tab">Private</span>
-        </div>
-
-        <div class="conversations-list">
-            
-            <div class="convo-item" onclick="openConversation('Museum Lovers 🎨', true)">
-                <div class="convo-avatar bg-purple">🎨</div>
-                <div class="convo-info">
-                    <h4>Museum Lovers</h4>
-                    <p>Lena: Anyone going to Palais des B...</p>
-                </div>
-                <span class="time">2m</span>
-            </div>
-
-            <div class="convo-item" onclick="openConversation('Sarah J. 🇬🇧', false)">
-                <div class="convo-avatar" style="background: #ff7675;">SJ</div>
-                <div class="convo-info">
-                    <h4>Sarah J.</h4>
-                    <p>That sounds great! See you there.</p>
-                </div>
-                <span class="time">1h</span>
-            </div>
-
-             <div class="convo-item unread">
-                <div class="convo-avatar" style="background: #0984e3;">MK</div>
-                <div class="convo-info">
-                    <h4>Mehdi K.</h4>
-                    <p>Do you know where the library is?</p>
-                </div>
-                <span class="time">3h</span>
-                <div class="unread-dot"></div>
+            <!-- Container for dynamic deals -->
+            <div id="deals-container" class="deals-grid">
+                <!-- Deals will be injected here by JS -->
             </div>
         </div>
     </div>
 
-    <div id="chat-conversation-view" class="chat-view">
-        <div class="active-chat-header">
-            <button class="back-btn" onclick="closeConversation()">←</button>
-            <h4 id="current-chat-name">User Name</h4>
-        </div>
+    <!-- Script to render deals -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
 
-        <div class="messages-container">
-            <div class="message received">
-                <p>Hey! Are you coming to the event tonight?</p>
-                <span class="msg-time">10:30 AM</span>
-            </div>
+            // 1. Data (Simulation of Database) - UPDATED with Conditions
+            const deals = [
+                {
+                    id: 1,
+                    brand: "Big Fernand",
+                    startIcon: "🍔",
+                    colorClass: "bg-red",
+                    discount: "-20% OFF",
+                    title: "The Big Feast",
+                    description: "Enjoy our famous hamburgés with a student discount.",
+                    conditions: "Valid on all \"Little Formule\" menus between 12pm and 2pm. Student ID required.",
+                    code: "YUMMY20",
+                    category: "food"
+                },
+                {
+                    id: 2,
+                    brand: "UGC Ciné Cité",
+                    startIcon: "🎬",
+                    colorClass: "bg-purple",
+                    discount: "1 Bought = 1 Free",
+                    title: "Movie Night Duo",
+                    description: "Bring a friend and pay for only one ticket.",
+                    conditions: "Valid on Tuesday nights only. Not applicable for 3D or IMAX screenings.",
+                    code: "MOVIENIGHT",
+                    category: "events"
+                },
+                {
+                    id: 3,
+                    brand: "Notting Hill Coffee",
+                    startIcon: "☕",
+                    colorClass: "bg-yellow",
+                    discount: "Free Cookie",
+                    title: "Sweet Break",
+                    description: "Get a delicious XL cookie with your drink.",
+                    conditions: "Offer valid for any purchase of an XL Drink. One per person per day.",
+                    code: "COOKIE4U",
+                    category: "food"
+                },
+                {
+                    id: 4,
+                    brand: "FlixBus",
+                    startIcon: "🌍",
+                    colorClass: "bg-green",
+                    discount: "-15% Voucher",
+                    title: "Travel Cheaper",
+                    description: "Explore Europe for less this weekend.",
+                    conditions: "Valid on all rides departing from or arriving at Lille Europe station.",
+                    code: "TRAVEL26",
+                    category: "partners"
+                },
+                {
+                    id: 5,
+                    brand: "Basic Fit",
+                    startIcon: "🏋️",
+                    colorClass: "bg-orange",
+                    discount: "1st Month Free",
+                    title: "Get Fit Now",
+                    description: "Join the club and start your fitness journey.",
+                    conditions: "Join now and get the sport bag for free. Commitment of 12 months minimum.",
+                    code: "GYM2026",
+                    category: "partners",
+                    customStyle: "background: #e67e22;"
+                }
+            ];
 
-            <div class="message sent">
-                <p>Yes absolutely! I'm bringing a friend.</p>
-                <span class="msg-time">10:32 AM</span>
-            </div>
-            
-            <div class="message received">
-                <p>Awesome, see you at the Gare St Sauveur! 🚂</p>
-                <span class="msg-time">10:33 AM</span>
-            </div>
-        </div>
+            const container = document.getElementById('deals-container');
+            const modal = document.getElementById('deal-modal');
+            const modalTitle = document.getElementById('modal-deal-title');
+            const modalDesc = document.getElementById('modal-deal-desc');
+            const modalConditions = document.getElementById('modal-deal-conditions');
+            const closeModal = document.getElementById('close-deal-modal');
 
-        <div class="chat-input-area">
-            <input type="text" placeholder="Type a message..." id="msg-input">
-            <button class="send-btn">➤</button>
-        </div>
-    </div>
+            // 2. Render Function (Redesigned "Coupon" Cards)
+            function renderDeals(filter = 'all') {
+                container.innerHTML = '';
 
-</div>
+                deals.forEach(deal => {
+                    if (filter === 'all' || deal.category === filter) {
+                        const card = document.createElement('div');
+                        card.className = 'coupon-card'; // New Class
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        
-        // 1. On récupère les éléments
-        const chatDrawer = document.getElementById('chat-drawer');
-        const chatToggle = document.getElementById('chat-toggle');
-        const closeChatBtn = document.getElementById('close-chat');
+                        // Handle custom colors 
+                        let iconStyle = '';
+                        if (deal.customStyle) iconStyle = `style="${deal.customStyle}"`;
+                        const iconClass = deal.colorClass || '';
 
-        // Vérification de sécurité (au cas où on oublie le HTML)
-        if (chatToggle && chatDrawer) {
-            
-            // 2. Ouvrir le tiroir
-            chatToggle.addEventListener('click', () => {
-                chatDrawer.classList.add('open');
-            });
+                        card.innerHTML = `
+                            <!-- Left Side: Visual & Info -->
+                            <div class="coupon-visual">
+                                <div class="coupon-header">
+                                    <div class="brand-badge ${iconClass}" ${iconStyle}>${deal.startIcon}</div>
+                                    <span class="discount-tag">${deal.discount}</span>
+                                </div>
+                                <div class="coupon-content">
+                                    <h3>${deal.brand}</h3>
+                                    <p>${deal.title}</p>
+                                    <button class="info-btn" onclick="openDealModal(${deal.id})">
+                                        More Info ⓘ
+                                    </button>
+                                </div>
+                            </div>
 
-            // 3. Fermer le tiroir
-            if (closeChatBtn) {
-                closeChatBtn.addEventListener('click', () => {
-                    chatDrawer.classList.remove('open');
+                            <!-- Divider (The "Tear" line) -->
+                            <div class="coupon-divider">
+                                <div class="notch-top"></div>
+                                <div class="dashed-line"></div>
+                                <div class="notch-bottom"></div>
+                            </div>
+
+                            <!-- Right Side: Action (Code) -->
+                            <div class="coupon-action">
+                                <span class="action-label">YOUR CODE</span>
+                                <div class="code-display" onclick="copyCode(this, '${deal.code}')">
+                                    <span class="code-text">${deal.code}</span>
+                                    <span class="copy-icon">📋</span>
+                                </div>
+                                <p class="click-hint">Click to copy</p>
+                            </div>
+                        `;
+                        container.appendChild(card);
+                    }
                 });
             }
 
-            // Fermer si on clique sur le fond flouté (optionnel mais sympa)
-            chatDrawer.addEventListener('click', (e) => {
-                if (e.target === chatDrawer) {
-                    chatDrawer.classList.remove('open');
+            // 3. Modal Logic
+            window.openDealModal = function (id) {
+                const deal = deals.find(d => d.id === id);
+                if (deal && modal) {
+                    modalTitle.textContent = deal.brand + " - " + deal.discount;
+                    modalDesc.textContent = deal.description;
+                    modalConditions.textContent = deal.conditions;
+                    modal.classList.add('open');
                 }
+            };
+
+            if (closeModal) {
+                closeModal.addEventListener('click', () => modal.classList.remove('open'));
+            }
+            if (modal) {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) modal.classList.remove('open');
+                });
+            }
+
+            // 4. Copy Logic
+            window.copyCode = function (el, code) {
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(code).then(() => {
+                        // Visual feedback inside the element
+                        const originalHTML = el.innerHTML;
+                        el.innerHTML = `<span style="color:#00b894; font-weight:bold;">COPIED!</span>`;
+                        setTimeout(() => {
+                            el.innerHTML = originalHTML;
+                        }, 2000);
+                    });
+                } else {
+                    alert(`Code: ${code}`);
+                }
+            };
+
+            // Initial Render
+            renderDeals();
+
+            // Filter Logic (For future implementation)
+            const filterBtns = document.querySelectorAll('.filter-option');
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                });
             });
-        }
 
-        // --- NAVIGATION DANS LE CHAT (Liste <-> Conversation) ---
-        const listView = document.getElementById('chat-list-view');
-        const convoView = document.getElementById('chat-conversation-view');
-        const chatTitle = document.getElementById('current-chat-name');
+        });
+    </script>
 
-        // On rend ces fonctions globales pour qu'elles marchent avec les onclick="..." du HTML
-        window.openConversation = function(name, isGroup) {
-            if(listView && convoView) {
-                listView.classList.remove('active');
-                convoView.classList.add('active');
-                if(chatTitle) chatTitle.textContent = name;
+    <!-- Deal Details Modal -->
+    <div id="deal-modal" class="modal-overlay">
+        <div class="modal-card" style="max-width: 400px; text-align: center;">
+            <div class="modal-header">
+                <h3 id="modal-deal-title">Deal Title</h3>
+                <button id="close-deal-modal" class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="modal-deal-desc" style="color: #ddd; margin-bottom: 20px;">Description</p>
+                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; text-align: left;">
+                    <h4 style="font-size: 0.9rem; color: var(--accent-color); margin-bottom: 10px;">Conditions:</h4>
+                    <p id="modal-deal-conditions" style="font-size: 0.85rem; color: var(--text-muted);">Conditions
+                        text...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="chat-drawer" class="chat-drawer">
+
+        <div class="chat-header">
+            <h3>Messages</h3>
+            <button id="close-chat" class="close-btn">&times;</button>
+        </div>
+
+        <div id="chat-list-view" class="chat-view active">
+
+            <div class="chat-tabs">
+                <span class="chat-tab active">All</span>
+                <span class="chat-tab">Groups</span>
+                <span class="chat-tab">Private</span>
+            </div>
+
+            <div class="conversations-list">
+
+                <div class="convo-item" onclick="openConversation('Museum Lovers 🎨', true)">
+                    <div class="convo-avatar bg-purple">🎨</div>
+                    <div class="convo-info">
+                        <h4>Museum Lovers</h4>
+                        <p>Lena: Anyone going to Palais des B...</p>
+                    </div>
+                    <span class="time">2m</span>
+                </div>
+
+                <div class="convo-item" onclick="openConversation('Sarah J. 🇬🇧', false)">
+                    <div class="convo-avatar avatar-red">SJ</div>
+                    <div class="convo-info">
+                        <h4>Sarah J.</h4>
+                        <p>That sounds great! See you there.</p>
+                    </div>
+                    <span class="time">1h</span>
+                </div>
+
+                <div class="convo-item unread">
+                    <div class="convo-avatar avatar-blue">MK</div>
+                    <div class="convo-info">
+                        <h4>Mehdi K.</h4>
+                        <p>Do you know where the library is?</p>
+                    </div>
+                    <span class="time">3h</span>
+                    <div class="unread-dot"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="chat-conversation-view" class="chat-view">
+            <div class="active-chat-header">
+                <button class="back-btn" onclick="closeConversation()">←</button>
+                <h4 id="current-chat-name">User Name</h4>
+            </div>
+
+            <div class="messages-container">
+                <div class="message received">
+                    <p>Hey! Are you coming to the event tonight?</p>
+                    <span class="msg-time">10:30 AM</span>
+                </div>
+
+                <div class="message sent">
+                    <p>Yes absolutely! I'm bringing a friend.</p>
+                    <span class="msg-time">10:32 AM</span>
+                </div>
+
+                <div class="message received">
+                    <p>Awesome, see you at the Gare St Sauveur! 🚂</p>
+                    <span class="msg-time">10:33 AM</span>
+                </div>
+            </div>
+
+            <div class="chat-input-area">
+                <input type="text" placeholder="Type a message..." id="msg-input">
+                <button class="send-btn">➤</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            // 1. On récupère les éléments
+            const chatDrawer = document.getElementById('chat-drawer');
+            const chatToggle = document.getElementById('chat-toggle');
+            const closeChatBtn = document.getElementById('close-chat');
+
+            // Vérification de sécurité (au cas où on oublie le HTML)
+            if (chatToggle && chatDrawer) {
+
+                // 2. Ouvrir le tiroir
+                chatToggle.addEventListener('click', () => {
+                    chatDrawer.classList.add('open');
+                });
+
+                // 3. Fermer le tiroir
+                if (closeChatBtn) {
+                    closeChatBtn.addEventListener('click', () => {
+                        chatDrawer.classList.remove('open');
+                    });
+                }
+
+                // Fermer si on clique sur le fond flouté (optionnel mais sympa)
+                chatDrawer.addEventListener('click', (e) => {
+                    if (e.target === chatDrawer) {
+                        chatDrawer.classList.remove('open');
+                    }
+                });
             }
-        };
 
-        window.closeConversation = function() {
-            if(listView && convoView) {
-                convoView.classList.remove('active');
-                listView.classList.add('active');
-            }
-        };
-    });
-</script>
+            // --- NAVIGATION DANS LE CHAT (Liste <-> Conversation) ---
+            const listView = document.getElementById('chat-list-view');
+            const convoView = document.getElementById('chat-conversation-view');
+            const chatTitle = document.getElementById('current-chat-name');
+
+            // On rend ces fonctions globales pour qu'elles marchent avec les onclick="..." du HTML
+            window.openConversation = function (name, isGroup) {
+                if (listView && convoView) {
+                    listView.classList.remove('active');
+                    convoView.classList.add('active');
+                    if (chatTitle) chatTitle.textContent = name;
+                }
+            };
+
+            window.closeConversation = function () {
+                if (listView && convoView) {
+                    convoView.classList.remove('active');
+                    listView.classList.add('active');
+                }
+            };
+        });
+    </script>
 
 </body>
-

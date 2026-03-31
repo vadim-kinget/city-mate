@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,16 +8,18 @@
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#6c5ce7">
     <link rel="apple-touch-icon" href="icon.png">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%236c5ce7'/><text x='50' y='65' font-family='Arial, sans-serif' font-weight='bold' font-size='50' fill='white' text-anchor='middle'>CM</text></svg>">
-    
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%236c5ce7'/><text x='50' y='65' font-family='Arial, sans-serif' font-weight='bold' font-size='50' fill='white' text-anchor='middle'>CM</text></svg>">
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style-main.css?v=4">
 </head>
+
 <body>
 
     <nav>
         <a href="index.html" class="logo">City<span>Mate</span></a>
-        
+
         <div class="nav-links">
             <a href="index.html">
                 <span class="nav-icon">🗺️</span>
@@ -26,17 +29,14 @@
                 <span class="nav-icon">📖</span>
                 <span class="nav-text">Guides</span>
             </a>
-            <a href="deals.html">
-                <span class="nav-icon">🏷️</span>
-                <span class="nav-text">Deals</span>
-            </a>
+
             <a href="community.html">
                 <span class="nav-icon">👥</span>
                 <span class="nav-text">Community</span>
             </a>
         </div>
 
-        <div class="nav-right" style="display: flex; align-items: center; gap: 15px;">
+        <div class="nav-right">
             <button id="chat-toggle" class="chat-btn">
                 💬 <span class="notif-badge">2</span>
             </button>
@@ -48,7 +48,7 @@
     </nav>
 
     <div class="profile-container">
-        
+
         <div class="profile-header-card">
             <div class="profile-top">
                 <div class="big-avatar"></div>
@@ -59,63 +59,102 @@
                 </div>
                 <div class="settings-dropdown-wrapper">
                     <button id="settings-btn" class="edit-btn">⚙️ Settings</button>
-                    
+
                     <div id="settings-menu" class="dropdown-menu">
                         <a href="#" class="dropdown-item">👤 Edit Profile</a>
                         <a href="#" class="dropdown-item">🔔 Notifications</a>
                         <a href="#" class="dropdown-item">🌙 Dark Mode</a>
-                        <div class="dropdown-divider"></div> <a href="#" id="reset-app-btn" class="dropdown-item text-danger">⚠️ Reset App</a>
+                        <div class="dropdown-divider"></div> <a href="#" id="reset-app-btn"
+                            class="dropdown-item text-danger">⚠️ Reset App</a>
                     </div>
                 </div>
             </div>
 
-            <div class="level-section">
-                <div class="level-info">
-                    <span>Level 5 🌟</span>
-                    <span>1,250 / 2,000 XP</span>
+            <!-- Bio Section -->
+            <div class="profile-bio">
+                <p class="bio-text">"Passionate about intercultural exchange and making international students feel at home in Lille. Always up for a coffee chat or museum visit! ☕🎨"</p>
+                <div class="bio-tags">
+                    <span class="bio-tag">🏠 From London, UK</span>
+                    <span class="bio-tag">📚 International Relations</span>
+                    <span class="bio-tag">🇬🇧 English</span>
+                    <span class="bio-tag">🇫🇷 French (B2)</span>
+                    <span class="bio-tag">🇪🇸 Spanish</span>
                 </div>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 65%;"></div>
-                </div>
-                <p class="next-reward">Next reward: Free Coffee at Level 6 ☕</p>
+            </div>
+
+        </div>
+
+        <!-- Stats Bar -->
+        <div class="stats-bar">
+            <div class="stat-item">
+                <span class="stat-number" data-target="24">0</span>
+                <span class="stat-label">Events Attended</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <span class="stat-number" data-target="7">0</span>
+                <span class="stat-label">Events Hosted</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <span class="stat-number" data-target="13">0</span>
+                <span class="stat-label">Q&A Answers</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <span class="stat-number" data-target="3">0</span>
+                <span class="stat-label">Squads Joined</span>
             </div>
         </div>
 
         <div class="dashboard-grid">
-            
-            <div class="dash-card">
-                <h3>🏆 My Badges</h3>
-                <div class="badges-row">
-                    <div class="badge-item" title="First Event Hosted">
-                        <div class="badge-icon bg-purple">🎤</div>
-                        <span>Host</span>
-                    </div>
-                    <div class="badge-item" title="Used 5 Deals">
-                        <div class="badge-icon bg-yellow">🏷️</div>
-                        <span>Saver</span>
-                    </div>
-                    <div class="badge-item grayscale" title="Locked: Join 10 events">
-                        <div class="badge-icon">🚀</div>
-                        <span>Social</span>
+
+            <div class="dash-card full-width">
+                <div class="card-header-flex">
+                    <h3>🏆 Trust & Badges</h3>
+                    <div class="trust-indicator">
+                        <span class="trust-label">Community Status:</span>
+                        <span class="trust-level established">Established Member</span>
                     </div>
                 </div>
-            </div>
 
-            <div class="dash-card">
-                <h3>🎟️ My Wallet</h3>
-                <div class="wallet-list">
-                    <div class="wallet-item">
-                        <span class="wallet-icon">🍔</span>
-                        <div>
-                            <strong>Big Fernand</strong>
-                            <span class="code-small">YUMMY20</span>
+                <div class="badges-gallery">
+                    <!-- ID Verified -->
+                    <div class="badge-wrapper">
+                        <div class="badge-circle bg-green">
+                            <span class="emoji">🛡️</span>
+                        </div>
+                        <span class="badge-name">ID Verified</span>
+                        <div class="badge-tooltip">
+                            <h4>ID Verified</h4>
+                            <p>Identity confirmed by CityMate. Security verified.</p>
                         </div>
                     </div>
-                    <div class="wallet-item">
-                        <span class="wallet-icon">🎬</span>
-                        <div>
-                            <strong>UGC Ciné</strong>
-                            <span class="code-small">MOVIENIGHT</span>
+
+                    <!-- Super Host -->
+                    <div class="badge-wrapper">
+                        <div class="badge-circle bg-purple">
+                            <span class="emoji">👑</span>
+                        </div>
+                        <span class="badge-name">Super Host</span>
+                        <div class="badge-tooltip">
+                            <h4>Super Host</h4>
+                            <p>Organized 5+ successfully rated events for the community.</p>
+                        </div>
+                    </div>
+
+                    <!-- Locked Placeholder -->
+                    <div class="badge-wrapper locked">
+                        <div class="badge-circle grayscale">
+                            <span class="emoji">🦋</span>
+                        </div>
+                        <span class="badge-name">Explorer</span>
+                        <div class="badge-tooltip">
+                            <h4>Social Explorer</h4>
+                            <p>Attend 10 events to unlock. (7/10)</p>
+                            <div class="badge-progress">
+                                <div class="badge-fill" style="width: 70%"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -129,6 +168,95 @@
                         <strong>English Conversation Club</strong>
                         <span>📍 Gare Saint Sauveur • Tomorrow 18:00</span>
                         <button class="manage-btn">Manage</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- My Squads -->
+            <div class="dash-card full-width">
+                <div class="card-header-flex">
+                    <h3>🏘️ My Squads</h3>
+                    <a href="community.html" class="view-all-link">View all →</a>
+                </div>
+                <div class="squads-grid">
+                    <div class="squad-mini-card">
+                        <div class="squad-mini-icon">🎨</div>
+                        <div class="squad-mini-info">
+                            <strong>Art &amp; Culture Explorers</strong>
+                            <span>👥 12 members</span>
+                        </div>
+                        <span class="squad-role-badge admin">Admin</span>
+                        <a href="squad_details.html" class="squad-view-btn">View</a>
+                    </div>
+                    <div class="squad-mini-card">
+                        <div class="squad-mini-icon">🗣️</div>
+                        <div class="squad-mini-info">
+                            <strong>English Conversation Club</strong>
+                            <span>👥 28 members</span>
+                        </div>
+                        <span class="squad-role-badge admin">Admin</span>
+                        <a href="squad_details.html" class="squad-view-btn">View</a>
+                    </div>
+                    <div class="squad-mini-card">
+                        <div class="squad-mini-icon">🍕</div>
+                        <div class="squad-mini-info">
+                            <strong>International Food Club</strong>
+                            <span>👥 41 members</span>
+                        </div>
+                        <span class="squad-role-badge member">Member</span>
+                        <a href="squad_details.html" class="squad-view-btn">View</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reviews Section -->
+            <div class="dash-card full-width">
+                <div class="card-header-flex">
+                    <h3>⭐ Community Reviews</h3>
+                    <span class="review-self-note">You can't review your own profile</span>
+                </div>
+
+                <div class="reviews-summary">
+                    <div class="avg-score">4.8</div>
+                    <div class="avg-stars">
+                        <span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star half">★</span>
+                    </div>
+                    <div class="avg-label">Based on 6 reviews</div>
+                </div>
+
+                <div id="reviews-list" class="reviews-list">
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar avatar-blue">LB</div>
+                            <div class="review-info">
+                                <strong>Lucas B.</strong>
+                                <span class="review-stars">★★★★★</span>
+                            </div>
+                            <span class="review-date">March 2026</span>
+                        </div>
+                        <p class="review-text">Alex organized an amazing English Conversation Club. Super welcoming and very well prepared. Felt at home right away!</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar avatar-red">MT</div>
+                            <div class="review-info">
+                                <strong>Marie T.</strong>
+                                <span class="review-stars">★★★★★</span>
+                            </div>
+                            <span class="review-date">Feb. 2026</span>
+                        </div>
+                        <p class="review-text">Helped me figure out how Doctolib works when I was sick. Really a lifesaver, very patient and kind 🙏</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar bg-purple">SK</div>
+                            <div class="review-info">
+                                <strong>Sophie K.</strong>
+                                <span class="review-stars">★★★★☆</span>
+                            </div>
+                            <span class="review-date">Jan. 2026</span>
+                        </div>
+                        <p class="review-text">Great squad leader for the Museum Lovers group! Very active and always posts interesting events. The only downside is that events sometimes change last minute.</p>
                     </div>
                 </div>
             </div>
@@ -155,7 +283,7 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const chatDrawer = document.getElementById('chat-drawer');
             const chatToggle = document.getElementById('chat-toggle');
             const closeChatBtn = document.getElementById('close-chat');
@@ -174,7 +302,7 @@
         const resetBtn = document.getElementById('reset-app-btn');
 
         if (settingsBtn && settingsMenu) {
-            
+
             // 1. Ouvrir / Fermer le menu au clic
             settingsBtn.addEventListener('click', (e) => {
                 e.stopPropagation(); // Empêche de fermer tout de suite
@@ -192,7 +320,7 @@
             if (resetBtn) {
                 resetBtn.addEventListener('click', (e) => {
                     e.preventDefault(); // Empêche le lien de recharger la page
-                    
+
                     if (confirm("⚠️ Warning\n\nThis will delete all your created events and reset the app. Are you sure?")) {
                         localStorage.removeItem('citymate_events');
                         alert("App reset successfully! 🧹");
@@ -200,7 +328,7 @@
                     }
                 });
             }
-            
+
             // 4. Action : Les autres boutons (Placeholders)
             const otherLinks = settingsMenu.querySelectorAll('.dropdown-item:not(#reset-app-btn)');
             otherLinks.forEach(link => {
@@ -211,5 +339,120 @@
             });
         }
     </script>
+
+    <!-- Review Modal -->
+    <div id="review-modal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2>Leave a Review</h2>
+                <button id="close-review-modal" class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body" style="padding-top:10px">
+                <p style="color:var(--text-muted);font-size:.9rem;margin-bottom:20px">How was your experience with <strong>Alex</strong>?</p>
+                <div class="star-picker" id="star-picker">
+                    <span class="star-pick" data-val="1">★</span>
+                    <span class="star-pick" data-val="2">★</span>
+                    <span class="star-pick" data-val="3">★</span>
+                    <span class="star-pick" data-val="4">★</span>
+                    <span class="star-pick" data-val="5">★</span>
+                </div>
+                <div class="form-group" style="margin-top:20px">
+                    <label>Your comment</label>
+                    <textarea id="review-text" rows="4" placeholder="Share your experience with the community..."></textarea>
+                </div>
+                <button id="submit-review" class="submit-btn" style="border-radius:20px;margin-top:5px">Post Review</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Reviews logic
+        (function() {
+            const modal = document.getElementById('review-modal');
+            const openBtn = document.getElementById('open-review-modal');
+            const closeBtn = document.getElementById('close-review-modal');
+            const submitBtn = document.getElementById('submit-review');
+            const reviewsList = document.getElementById('reviews-list');
+            const stars = document.querySelectorAll('.star-pick');
+            let selectedRating = 0;
+
+            // Star picker interaction
+            stars.forEach(star => {
+                star.addEventListener('mouseover', () => highlightStars(+star.dataset.val));
+                star.addEventListener('mouseout', () => highlightStars(selectedRating));
+                star.addEventListener('click', () => {
+                    selectedRating = +star.dataset.val;
+                    highlightStars(selectedRating);
+                });
+            });
+
+            function highlightStars(count) {
+                stars.forEach(s => s.classList.toggle('active', +s.dataset.val <= count));
+            }
+
+            openBtn.addEventListener('click', () => modal.classList.add('open'));
+            closeBtn.addEventListener('click', () => modal.classList.remove('open'));
+            modal.addEventListener('click', e => { if (e.target === modal) modal.classList.remove('open'); });
+
+            submitBtn.addEventListener('click', () => {
+                const text = document.getElementById('review-text').value.trim();
+                if (!text || selectedRating === 0) {
+                    submitBtn.style.animation = 'shake .3s ease';
+                    setTimeout(() => submitBtn.style.animation = '', 400);
+                    return;
+                }
+                const starsHtml = '★'.repeat(selectedRating) + '☆'.repeat(5 - selectedRating);
+                const months = ['Jan.','Feb.','Mar.','Apr.','May','Jun.','Jul.','Aug.','Sep.','Oct.','Nov.','Dec.'];
+                const now = new Date();
+                const dateStr = months[now.getMonth()] + ' ' + now.getFullYear();
+
+                const newReview = `
+                    <div class="review-card" style="border-color:var(--accent-color);animation:fadeSlideIn .4s ease">
+                        <div class="review-header">
+                            <div class="review-avatar bg-purple">A</div>
+                            <div class="review-info">
+                                <strong>Alex (You)</strong>
+                                <span class="review-stars">${starsHtml}</span>
+                            </div>
+                            <span class="review-date">${dateStr}</span>
+                        </div>
+                        <p class="review-text">${text}</p>
+                    </div>`;
+
+                reviewsList.insertAdjacentHTML('afterbegin', newReview);
+                modal.classList.remove('open');
+                document.getElementById('review-text').value = '';
+                selectedRating = 0;
+                highlightStars(0);
+            });
+        })();
+    </script>
+
+    <script>
+        // Animated counter for stats
+        document.addEventListener('DOMContentLoaded', function() {
+            const counters = document.querySelectorAll('.stat-number[data-target]');
+            const animate = (el) => {
+                const target = +el.dataset.target;
+                const duration = 800;
+                const step = target / (duration / 16);
+                let current = 0;
+                const timer = setInterval(() => {
+                    current = Math.min(current + step, target);
+                    el.textContent = Math.floor(current);
+                    if (current >= target) clearInterval(timer);
+                }, 16);
+            };
+
+            // Trigger when visible
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(e => { if (e.isIntersecting) { animate(e.target); observer.unobserve(e.target); } });
+            }, { threshold: 0.5 });
+
+            counters.forEach(c => observer.observe(c));
+        });
+    </script>
+
 </body>
+
 </html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,16 +8,18 @@
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#6c5ce7">
     <link rel="apple-touch-icon" href="icon.png">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%236c5ce7'/><text x='50' y='65' font-family='Arial, sans-serif' font-weight='bold' font-size='50' fill='white' text-anchor='middle'>CM</text></svg>">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%236c5ce7'/><text x='50' y='65' font-family='Arial, sans-serif' font-weight='bold' font-size='50' fill='white' text-anchor='middle'>CM</text></svg>">
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style-main.css?v=4">
 </head>
+
 <body>
 
     <nav>
         <a href="index.html" class="logo">City<span>Mate</span></a>
-        
+
         <div class="nav-links">
             <a href="index.html">
                 <span class="nav-icon">🗺️</span>
@@ -26,18 +29,15 @@
                 <span class="nav-icon">📖</span>
                 <span class="nav-text">Guides</span>
             </a>
-            <a href="deals.html">
-                <span class="nav-icon">🏷️</span>
-                <span class="nav-text">Deals</span>
-            </a>
+
             <a href="community.html">
                 <span class="nav-icon">👥</span>
                 <span class="nav-text">Community</span>
             </a>
         </div>
 
-        <div class="nav-right" style="display: flex; align-items: center; gap: 15px;">
-    
+        <div class="nav-right">
+
             <button id="chat-toggle" class="chat-btn">
                 💬 <span class="notif-badge">2</span>
             </button>
@@ -50,12 +50,17 @@
     </nav>
 
     <div class="guides-container">
-        
+
         <header class="guides-header">
             <h1>Survival Guides 🎓</h1>
             <p>Everything you need to know about settling in Lille.</p>
-            
-            <div class="tags-row">
+
+            <div class="view-toggle">
+                <button class="toggle-btn active" id="btn-official-guides">📖 Official Guides</button>
+                <button class="toggle-btn" id="btn-community-qa">💬 Community Q&A</button>
+            </div>
+
+            <div class="tags-row" id="guides-tags">
                 <span class="tag active" data-category="all">All</span>
                 <span class="tag" data-category="admin">Admin 📂</span>
                 <span class="tag" data-category="health">Health 🏥</span>
@@ -65,7 +70,7 @@
         </header>
 
         <div class="guides-grid">
-            
+
             <article class="guide-card" data-category="admin">
                 <div class="card-thumb admin-color">📂</div>
                 <div class="card-content">
@@ -107,173 +112,698 @@
             </article>
 
         </div>
-    </div>
 
-<div id="chat-drawer" class="chat-drawer">
-    
-    <div class="chat-header">
-        <h3>Messages</h3>
-        <button id="close-chat" class="close-btn">&times;</button>
-    </div>
-
-    <div id="chat-list-view" class="chat-view active">
-        
-        <div class="chat-tabs">
-            <span class="chat-tab active">All</span>
-            <span class="chat-tab">Groups</span>
-            <span class="chat-tab">Private</span>
-        </div>
-
-        <div class="conversations-list">
+        <div class="qa-container" id="qa-view" style="display: none;">
             
-            <div class="convo-item" onclick="openConversation('Museum Lovers 🎨', true)">
-                <div class="convo-avatar bg-purple">🎨</div>
-                <div class="convo-info">
-                    <h4>Museum Lovers</h4>
-                    <p>Lena: Anyone going to Palais des B...</p>
-                </div>
-                <span class="time">2m</span>
+            <div class="qa-header-actions">
+                <input type="text" class="qa-search" placeholder="Search a question...">
+                <button class="btn-ask-question">➕ Ask a Question</button>
             </div>
 
-            <div class="convo-item" onclick="openConversation('Sarah J. 🇬🇧', false)">
-                <div class="convo-avatar" style="background: #ff7675;">SJ</div>
-                <div class="convo-info">
-                    <h4>Sarah J.</h4>
-                    <p>That sounds great! See you there.</p>
+            <div class="qa-feed">
+                <!-- Thread 1 -->
+                <div class="qa-thread" data-id="1">
+                    <div class="vote-column">
+                        <button class="btn-upvote">▲</button>
+                        <span class="vote-count">42</span>
+                        <button class="btn-downvote">▼</button>
+                    </div>
+                    <div class="qa-content">
+                        <h3 class="qa-title">Where can I go to see the doctor near La Catho ?</h3>
+                        <p class="qa-preview">I have a fever since yesterday but I'm an international student and I don't know how Doctolib works here. Any clinic around Vauban that accepts walk-ins?</p>
+                        <div class="qa-meta">
+                            <span class="qa-author"><div class="tiny-avatar avatar-blue">JS</div> Posted by John S. • 2 hrs ago</span> | <span class="tag-small health-color-tag">Health 🏥</span>
+                        </div>
+                        <div class="qa-footer">
+                            <button class="btn-reply">💬 6 answers</button>
+                            <button class="btn-share">↗ Share</button>
+                        </div>
+                    </div>
                 </div>
-                <span class="time">1h</span>
-            </div>
 
-             <div class="convo-item unread">
-                <div class="convo-avatar" style="background: #0984e3;">MK</div>
-                <div class="convo-info">
-                    <h4>Mehdi K.</h4>
-                    <p>Do you know where the library is?</p>
+                <!-- Thread 2 -->
+                <div class="qa-thread" data-id="2">
+                    <div class="vote-column">
+                        <button class="btn-upvote">▲</button>
+                        <span class="vote-count">15</span>
+                        <button class="btn-downvote">▼</button>
+                    </div>
+                    <div class="qa-content">
+                        <h3 class="qa-title">How can I get myself a public transport card in Lille?</h3>
+                        <p class="qa-preview">Hey everyone, what's the cheapest way to use the Metro and bus? Do I need a physical card or is there an app?</p>
+                        <div class="qa-meta">
+                            <span class="qa-author"><div class="tiny-avatar avatar-red">LM</div> Posted by Laura M. • 5 hrs ago</span> | <span class="tag-small transport-color-tag">Transport 🚌</span>
+                        </div>
+                        <div class="qa-footer">
+                            <button class="btn-reply">💬 3 answers</button>
+                            <button class="btn-share">↗ Share</button>
+                        </div>
+                    </div>
                 </div>
-                <span class="time">3h</span>
-                <div class="unread-dot"></div>
+
+                <!-- Thread 3 -->
+                <div class="qa-thread" data-id="3">
+                    <div class="vote-column">
+                        <button class="btn-upvote">▲</button>
+                        <span class="vote-count">8</span>
+                        <button class="btn-downvote">▼</button>
+                    </div>
+                    <div class="qa-content">
+                        <h3 class="qa-title">Will the CAF accept my application if my guarantor is not French?</h3>
+                        <p class="qa-preview">My parents live in Spain and are trying to be my guarantor for an apartment. I heard CAF makes this difficult...</p>
+                        <div class="qa-meta">
+                            <span class="qa-author"><div class="tiny-avatar bg-purple">E</div> Posted by Elena • 1 day ago</span> | <span class="tag-small housing-color-tag">Housing 🏠</span>
+                        </div>
+                        <div class="qa-footer">
+                            <button class="btn-reply">💬 12 answers</button>
+                            <button class="btn-share">↗ Share</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+    </div>
+
+    <!-- Q&A Thread Detail Panel -->
+    <div id="qa-detail-overlay" class="qa-detail-overlay">
+        <div id="qa-detail-panel" class="qa-detail-panel">
+            <div class="qa-detail-header">
+                <button id="qa-detail-back" class="qa-back-btn">← Back</button>
+                <span class="qa-detail-label">Community Q&A</span>
+            </div>
+            <div class="qa-detail-body">
+                <!-- Injected by JS -->
             </div>
         </div>
     </div>
 
-    <div id="chat-conversation-view" class="chat-view">
-        <div class="active-chat-header">
-            <button class="back-btn" onclick="closeConversation()">←</button>
-            <h4 id="current-chat-name">User Name</h4>
+    <div id="chat-drawer" class="chat-drawer">
+
+        <div class="chat-header">
+            <h3>Messages</h3>
+            <button id="close-chat" class="close-btn">&times;</button>
         </div>
 
-        <div class="messages-container">
-            <div class="message received">
-                <p>Hey! Are you coming to the event tonight?</p>
-                <span class="msg-time">10:30 AM</span>
+        <div id="chat-list-view" class="chat-view active">
+
+            <div class="chat-tabs">
+                <span class="chat-tab active">All</span>
+                <span class="chat-tab">Groups</span>
+                <span class="chat-tab">Private</span>
             </div>
 
-            <div class="message sent">
-                <p>Yes absolutely! I'm bringing a friend.</p>
-                <span class="msg-time">10:32 AM</span>
-            </div>
-            
-            <div class="message received">
-                <p>Awesome, see you at the Gare St Sauveur! 🚂</p>
-                <span class="msg-time">10:33 AM</span>
+            <div class="conversations-list">
+
+                <div class="convo-item" onclick="openConversation('Museum Lovers 🎨', true)">
+                    <div class="convo-avatar bg-purple">🎨</div>
+                    <div class="convo-info">
+                        <h4>Museum Lovers</h4>
+                        <p>Lena: Anyone going to Palais des B...</p>
+                    </div>
+                    <span class="time">2m</span>
+                </div>
+
+                <div class="convo-item" onclick="openConversation('Sarah J. 🇬🇧', false)">
+                    <div class="convo-avatar avatar-red">SJ</div>
+                    <div class="convo-info">
+                        <h4>Sarah J.</h4>
+                        <p>That sounds great! See you there.</p>
+                    </div>
+                    <span class="time">1h</span>
+                </div>
+
+                <div class="convo-item unread">
+                    <div class="convo-avatar avatar-blue">MK</div>
+                    <div class="convo-info">
+                        <h4>Mehdi K.</h4>
+                        <p>Do you know where the library is?</p>
+                    </div>
+                    <span class="time">3h</span>
+                    <div class="unread-dot"></div>
+                </div>
             </div>
         </div>
 
-        <div class="chat-input-area">
-            <input type="text" placeholder="Type a message..." id="msg-input">
-            <button class="send-btn">➤</button>
+        <div id="chat-conversation-view" class="chat-view">
+            <div class="active-chat-header">
+                <button class="back-btn" onclick="closeConversation()">←</button>
+                <h4 id="current-chat-name">User Name</h4>
+            </div>
+
+            <div class="messages-container">
+                <div class="message received">
+                    <p>Hey! Are you coming to the event tonight?</p>
+                    <span class="msg-time">10:30 AM</span>
+                </div>
+
+                <div class="message sent">
+                    <p>Yes absolutely! I'm bringing a friend.</p>
+                    <span class="msg-time">10:32 AM</span>
+                </div>
+
+                <div class="message received">
+                    <p>Awesome, see you at the Gare St Sauveur! 🚂</p>
+                    <span class="msg-time">10:33 AM</span>
+                </div>
+            </div>
+
+            <div class="chat-input-area">
+                <input type="text" placeholder="Type a message..." id="msg-input">
+                <button class="send-btn">➤</button>
+            </div>
         </div>
+
     </div>
 
-</div>
+    <script>
+        // 1. On sélectionne tous les éléments nécessaires
+        const filters = document.querySelectorAll('.tag');
+        const cards = document.querySelectorAll('.guide-card');
 
-<script>
-    // 1. On sélectionne tous les éléments nécessaires
-    const filters = document.querySelectorAll('.tag');
-    const cards = document.querySelectorAll('.guide-card');
+        // 2. On ajoute un "écouteur d'événement" (clic) sur chaque filtre
+        filters.forEach(filter => {
+            filter.addEventListener('click', () => {
 
-    // 2. On ajoute un "écouteur d'événement" (clic) sur chaque filtre
-    filters.forEach(filter => {
-        filter.addEventListener('click', () => {
-            
-            // A. Gérer l'apparence des boutons (Active / Inactif)
-            // On enlève la classe 'active' de tous les boutons...
-            filters.forEach(f => f.classList.remove('active'));
-            // ...et on l'ajoute uniquement sur celui qu'on vient de cliquer
-            filter.classList.add('active');
+                // A. Gérer l'apparence des boutons (Active / Inactif)
+                // On enlève la classe 'active' de tous les boutons...
+                filters.forEach(f => f.classList.remove('active'));
+                // ...et on l'ajoute uniquement sur celui qu'on vient de cliquer
+                filter.classList.add('active');
 
-            // B. Gérer le filtrage des articles
-            const categoryToFilter = filter.getAttribute('data-category');
+                // B. Gérer le filtrage des articles
+                const categoryToFilter = filter.getAttribute('data-category');
 
-            cards.forEach(card => {
-                // On récupère la catégorie de la carte
-                const cardCategory = card.getAttribute('data-category');
+                cards.forEach(card => {
+                    // On récupère la catégorie de la carte
+                    const cardCategory = card.getAttribute('data-category');
 
-                // Si on a cliqué sur "All" OU si la catégorie correspond
-                if (categoryToFilter === 'all' || categoryToFilter === cardCategory) {
-                    card.style.display = 'flex'; // On affiche (flex pour garder la mise en page)
-                } else {
-                    card.style.display = 'none'; // On cache
-                }
+                    // Si on a cliqué sur "All" OU si la catégorie correspond
+                    if (categoryToFilter === 'all' || categoryToFilter === cardCategory) {
+                        card.style.display = 'flex'; // On affiche (flex pour garder la mise en page)
+                    } else {
+                        card.style.display = 'none'; // On cache
+                    }
+                });
             });
         });
-    });
-</script>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        
-        // 1. On récupère les éléments
-        const chatDrawer = document.getElementById('chat-drawer');
-        const chatToggle = document.getElementById('chat-toggle');
-        const closeChatBtn = document.getElementById('close-chat');
+        // 3. View Switcher Logic (Official vs Q&A)
+        const btnGuides = document.getElementById('btn-official-guides');
+        const btnQA = document.getElementById('btn-community-qa');
+        const guidesGrid = document.querySelector('.guides-grid');
+        const qaView = document.getElementById('qa-view');
+        const guidesTags = document.getElementById('guides-tags');
 
-        // Vérification de sécurité (au cas où on oublie le HTML)
-        if (chatToggle && chatDrawer) {
-            
-            // 2. Ouvrir le tiroir
-            chatToggle.addEventListener('click', () => {
-                chatDrawer.classList.add('open');
+        if (btnGuides && btnQA) {
+            btnGuides.addEventListener('click', () => {
+                btnGuides.classList.add('active');
+                btnQA.classList.remove('active');
+                guidesGrid.style.display = 'grid'; 
+                guidesTags.style.display = 'flex';
+                qaView.style.display = 'none';
             });
 
-            // 3. Fermer le tiroir
-            if (closeChatBtn) {
-                closeChatBtn.addEventListener('click', () => {
-                    chatDrawer.classList.remove('open');
+            btnQA.addEventListener('click', () => {
+                btnQA.classList.add('active');
+                btnGuides.classList.remove('active');
+                guidesGrid.style.display = 'none';
+                guidesTags.style.display = 'none';
+                qaView.style.display = 'block';
+            });
+        }
+    </script>
+
+    <!-- Article Modal -->
+    <div id="article-modal" class="modal-overlay">
+        <div class="modal-card article-modal-card">
+            <div class="modal-header">
+                <h2 id="article-title">Article Title</h2>
+                <button id="close-article" class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- Image Removed as per request -->
+                <div id="article-content" class="article-text">
+                    <!-- Text injected by JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script to handle Guides Data and Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            // 1. Guides Database (Mock)
+            const guidesData = {
+                admin: {
+                    title: "How to open a French bank account 🏦",
+                    // image line removed
+                    content: `
+                        <p>Opening a bank account in France can be tricky, but it's essential for receiving housing assistance (CAF) and paying bills.</p>
+                        <h3>Documents you need:</h3>
+                        <ul>
+                            <li><strong>Passport or ID Card</strong></li>
+                            <li><strong>Proof of Address</strong> (Justificatif de domicile)</li>
+                            <li><strong>School Certificate</strong> (Certificat de scolarité)</li>
+                        </ul>
+                        <h3>Best Banks for Students:</h3>
+                        <p>We recommend online banks like <strong>Revolut</strong> or <strong>BoursoBank</strong> for their ease of use and low fees. Traditional banks like BNP Paribas or Crédit Agricole often have student offers but require an appointment.</p>
+                        <div class="tip-box">💡 <strong>Tip:</strong> Ask for a "RIB" (Relevé d'Identité Bancaire) immediately. You'll need it for everything!</div>
+                    `
+                },
+                transport: {
+                    title: "Understanding Ilevia (Metro & Bus) 🚌",
+                    // image line removed
+                    content: `
+                        <p>Lille has a great public transport system called <strong>Ilevia</strong>. It includes 2 Metro lines, Tramways, and many Buses.</p>
+                        <h3>How to pay?</h3>
+                        <p>The best value is the <strong>Student Monthly Pass</strong> (~30€/month). You can make it at the agency in "Gare Lille Flandres" or "Place de la République".</p>
+                        <h3>Night Transport</h3>
+                        <p>Metros stop around midnight during the week and 1:30 AM on Saturdays. After that, use the "Night Bus" or Uber.</p>
+                        <div class="tip-box">⚠️ <strong>Warning:</strong> Controllers are frequent. Always validate your card!</div>
+                    `
+                },
+                health: {
+                    title: "Seeing a Doctor in France 🏥",
+                    // image line removed
+                    content: `
+                        <p>France has one of the best healthcare systems in the world.</p>
+                        <h3>Doctolib is your friend</h3>
+                        <p>Use the app <strong>Doctolib</strong> to book appointments. You can filter by "English speaking" (Anglais) to find a doctor who speaks your language.</p>
+                        <h3>La Sécu (Social Security)</h3>
+                        <p>Register on <strong>etudiant-etranger.ameli.fr</strong> to get your social security number. It reimburses about 70% of medical costs.</p>
+                        <p>For the remaining 30%, it is highly recommended to get a "Mutuelle" (Complementary Insurance).</p>
+                    `
+                },
+                housing: {
+                    title: "CAF & APL: Get money for rent 🏠",
+                    // image line removed
+                    content: `
+                        <p>The CAF (Caisse d'Allocations Familiales) offers financial help for paying rent, called <strong>APL</strong>.</p>
+                        <h3>Who is eligible?</h3>
+                        <p>Almost every student renting an apartment, regardless of nationality.</p>
+                        <h3>How to apply?</h3>
+                        <p>Everything is done online at <strong>caf.fr</strong>. You will need:</p>
+                        <ul>
+                            <li>Your Rental Contract (Bail)</li>
+                            <li>Bank Account (RIB)</li>
+                            <li>ID / Passport</li>
+                        </ul>
+                        <div class="tip-box">⏳ <strong>Patience:</strong> The first payment can take 2-3 months to arrive, but it is retroactive!</div>
+                    `
+                }
+            };
+
+            // 2. Modal Logic
+            const modal = document.getElementById('article-modal');
+            const closeBtn = document.getElementById('close-article');
+            const titleEl = document.getElementById('article-title');
+            // imgEl removed
+            const contentEl = document.getElementById('article-content');
+
+            // Function to open modal
+            window.openGuide = function (category) {
+                const data = guidesData[category];
+                if (data) {
+                    titleEl.textContent = data.title;
+                    // imgEl removal
+                    contentEl.innerHTML = data.content;
+                    modal.classList.add('open');
+                }
+            };
+
+            // Connect existing buttons
+            const cards = document.querySelectorAll('.guide-card');
+            cards.forEach(card => {
+                const category = card.getAttribute('data-category');
+                const btn = card.querySelector('.read-btn');
+
+                // Override default link behavior
+                if (btn) {
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        openGuide(category);
+                    });
+                }
+            });
+
+            // Close Logic
+            if (closeBtn) {
+                closeBtn.addEventListener('click', () => {
+                    modal.classList.remove('open');
+                });
+            }
+            // Close on overlay click
+            if (modal) {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) modal.classList.remove('open');
                 });
             }
 
-            // Fermer si on clique sur le fond flouté (optionnel mais sympa)
-            chatDrawer.addEventListener('click', (e) => {
-                if (e.target === chatDrawer) {
-                    chatDrawer.classList.remove('open');
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            // 1. On récupère les éléments
+            const chatDrawer = document.getElementById('chat-drawer');
+            const chatToggle = document.getElementById('chat-toggle');
+            const closeChatBtn = document.getElementById('close-chat');
+
+            // Vérification de sécurité (au cas où on oublie le HTML)
+            if (chatToggle && chatDrawer) {
+
+                // 2. Ouvrir le tiroir
+                chatToggle.addEventListener('click', () => {
+                    chatDrawer.classList.add('open');
+                });
+
+                // 3. Fermer le tiroir
+                if (closeChatBtn) {
+                    closeChatBtn.addEventListener('click', () => {
+                        chatDrawer.classList.remove('open');
+                    });
+                }
+
+                // Fermer si on clique sur le fond flouté (optionnel mais sympa)
+                chatDrawer.addEventListener('click', (e) => {
+                    if (e.target === chatDrawer) {
+                        chatDrawer.classList.remove('open');
+                    }
+                });
+            }
+
+            // --- NAVIGATION DANS LE CHAT (Liste <-> Conversation) ---
+            const listView = document.getElementById('chat-list-view');
+            const convoView = document.getElementById('chat-conversation-view');
+            const chatTitle = document.getElementById('current-chat-name');
+
+            // On rend ces fonctions globales pour qu'elles marchent avec les onclick="..." du HTML
+            window.openConversation = function (name, isGroup) {
+                if (listView && convoView) {
+                    listView.classList.remove('active');
+                    convoView.classList.add('active');
+                    if (chatTitle) chatTitle.textContent = name;
+                }
+            };
+
+            window.closeConversation = function () {
+                if (listView && convoView) {
+                    convoView.classList.remove('active');
+                    listView.classList.add('active');
+                }
+            };
+        });
+    </script>
+
+    <!-- Ask Question Modal -->
+    <div id="qa-modal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2>Ask the Community</h2>
+                <button id="close-qa-modal" class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body" style="padding-top: 10px;">
+                <form id="qa-form">
+                    <div class="form-group">
+                        <label>Title of your question</label>
+                        <input type="text" id="qa-title" required placeholder="e.g., Where is the cheapest printing place?">
+                    </div>
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select id="qa-category" required>
+                            <option value="Admin">Admin 📂</option>
+                            <option value="Health">Health 🏥</option>
+                            <option value="Transport">Transport 🚌</option>
+                            <option value="Housing">Housing 🏠</option>
+                            <option value="General">General 🌟</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Details</label>
+                        <textarea id="qa-desc" rows="4" required placeholder="Give some context..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn" style="border-radius:20px;">Post Question</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Q&A LOGIC ---
+        document.addEventListener('DOMContentLoaded', function() {
+            // 1. Voting System (Event delegation for dynamically added threads)
+            document.addEventListener('click', function(e) {
+                // Upvote
+                if (e.target.classList.contains('btn-upvote')) {
+                    const countSpan = e.target.nextElementSibling;
+                    const downBtn = countSpan.nextElementSibling;
+                    let current = parseInt(countSpan.textContent);
+                    
+                    if (!e.target.classList.contains('voted')) {
+                        countSpan.textContent = current + 1;
+                        e.target.classList.add('voted');
+                        e.target.style.color = '#ff7675';
+                        
+                        if(downBtn.classList.contains('voted')) {
+                            countSpan.textContent = parseInt(countSpan.textContent) + 1;
+                            downBtn.classList.remove('voted');
+                            downBtn.style.color = '';
+                        }
+                    } else {
+                        countSpan.textContent = current - 1;
+                        e.target.classList.remove('voted');
+                        e.target.style.color = '';
+                    }
+                }
+                
+                // Downvote
+                if (e.target.classList.contains('btn-downvote')) {
+                    const countSpan = e.target.previousElementSibling;
+                    const upBtn = countSpan.previousElementSibling;
+                    let current = parseInt(countSpan.textContent);
+                    
+                    if (!e.target.classList.contains('voted')) {
+                        countSpan.textContent = current - 1;
+                        e.target.classList.add('voted');
+                        e.target.style.color = '#74b9ff';
+                        
+                        if(upBtn.classList.contains('voted')) {
+                            countSpan.textContent = parseInt(countSpan.textContent) - 1;
+                            upBtn.classList.remove('voted');
+                            upBtn.style.color = '';
+                        }
+                    } else {
+                        countSpan.textContent = current + 1;
+                        e.target.classList.remove('voted');
+                        e.target.style.color = '';
+                    }
                 }
             });
+
+            // 2. Ask Question Modal
+            const qaModal = document.getElementById('qa-modal');
+            const btnAsk = document.querySelector('.btn-ask-question');
+            const closeQaBtn = document.getElementById('close-qa-modal');
+            const qaForm = document.getElementById('qa-form');
+            const qaFeed = document.querySelector('.qa-feed');
+
+            if (btnAsk && qaModal) {
+                btnAsk.addEventListener('click', () => {
+                    qaModal.classList.add('open');
+                });
+            }
+
+            if (closeQaBtn && qaModal) {
+                closeQaBtn.addEventListener('click', () => {
+                    qaModal.classList.remove('open');
+                });
+            }
+
+            if (qaModal) {
+                qaModal.addEventListener('click', (e) => {
+                    if (e.target === qaModal) qaModal.classList.remove('open');
+                });
+            }
+
+            if (qaForm && qaFeed) {
+                qaForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const title = document.getElementById('qa-title').value;
+                    const desc = document.getElementById('qa-desc').value;
+                    const cat = document.getElementById('qa-category').value;
+
+                    let colorCls = 'admin-color-tag';
+                    if(cat === 'Health') colorCls = 'health-color-tag';
+                    if(cat === 'Transport') colorCls = 'transport-color-tag';
+                    if(cat === 'Housing') colorCls = 'housing-color-tag';
+
+                    const newThreadHtml = `
+                        <div class="qa-thread" style="border: 1px solid var(--accent-color);">
+                            <div class="vote-column">
+                                <button class="btn-upvote voted" style="color:#ff7675;">▲</button>
+                                <span class="vote-count">1</span>
+                                <button class="btn-downvote">▼</button>
+                            </div>
+                            <div class="qa-content">
+                                <h3 class="qa-title">${title}</h3>
+                                <p class="qa-preview">${desc}</p>
+                                <div class="qa-meta">
+                                    <span class="qa-author"><div class="tiny-avatar bg-purple">A</div> Posted by Alex • Just now</span> | <span class="tag-small ${colorCls}">${cat}</span>
+                                </div>
+                                <div class="qa-footer">
+                                    <button class="btn-reply">💬 0 answers</button>
+                                    <button class="btn-share">↗ Share</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    qaFeed.insertAdjacentHTML('afterbegin', newThreadHtml);
+                    
+                    qaModal.classList.remove('open');
+                    qaForm.reset();
+                });
+            }
+        });
+    </script>
+
+    <script>
+        const threadDatabase = {
+            '1': { title: 'Where can I go to see the doctor near La Catho ?', body: "I have a fever since yesterday but I'm an international student and I don't know how Doctolib works here. Any clinic around Vauban that accepts walk-ins?", author: 'John S.', authorInitials: 'JS', authorCls: 'avatar-blue', time: '2 hrs ago', tag: 'Health', tagCls: 'health-color-tag', votes: 42, answers: [{ author: 'Marie T.', initials: 'MT', cls: 'avatar-red', time: '1 hr ago', text: 'Go to Cabinet Medical Saint-Michel on Rue de Valmy, 10 min from La Catho. Walk-ins until 12:00.', votes: 18 },{ author: 'Lucas B.', initials: 'LB', cls: 'avatar-blue', time: '1 hr ago', text: 'Use Doctolib, search medecin generaliste near Vauban Lille, filter for today slots.', votes: 12 },{ author: 'Sophie K.', initials: 'SK', cls: 'bg-purple', time: '45 min ago', text: 'The student health centre SEST at La Catho is free for enrolled students!', votes: 9 }]},
+            '2': { title: 'How can I get myself a public transport card in Lille?', body: "What's the cheapest way to use the Metro and bus? Do I need a physical card or is there an app?", author: 'Laura M.', authorInitials: 'LM', authorCls: 'avatar-red', time: '5 hrs ago', tag: 'Transport', tagCls: 'transport-color-tag', votes: 15, answers: [{ author: 'Alex (You)', initials: 'A', cls: 'bg-purple', time: '4 hrs ago', text: 'Go to the Ilevia agency at Gare Lille Flandres. Monthly student pass is around 30 euros.', votes: 7 },{ author: 'Riku N.', initials: 'RN', cls: 'avatar-blue', time: '3 hrs ago', text: 'There is also the Ilevia app on iOS/Android. Physical card is more reliable in the metro.', votes: 5 }]},
+            '3': { title: 'Will the CAF accept my application if my guarantor is not French?', body: 'My parents live in Spain and are trying to be my guarantor. I heard CAF makes this difficult...', author: 'Elena', authorInitials: 'E', authorCls: 'bg-purple', time: '1 day ago', tag: 'Housing', tagCls: 'housing-color-tag', votes: 8, answers: [{ author: 'Nadia F.', initials: 'NF', cls: 'avatar-blue', time: '23 hrs ago', text: "CAF (APL) does not care about your guarantor. It's about YOUR income and rent. Non-French guarantor is fine.", votes: 14 },{ author: 'Pierre G.', initials: 'PG', cls: 'avatar-red', time: '20 hrs ago', text: 'Look into VISALE, a free national guarantor scheme for students. Google VISALE logement.', votes: 11 },{ author: 'Elena', initials: 'E', cls: 'bg-purple', time: '18 hrs ago', text: "I didn't know about VISALE! Will check it out, thank you!", votes: 3 }]}
+        };
+        document.addEventListener('DOMContentLoaded', function () {
+            const overlay = document.getElementById('qa-detail-overlay');
+            const panel = document.getElementById('qa-detail-panel');
+            const backBtn = document.getElementById('qa-detail-back');
+            const detailBody = panel.querySelector('.qa-detail-body');
+            function openThread(id) {
+                const thread = threadDatabase[id];
+                if (!thread) return;
+                const answersHtml = thread.answers.map(a => '<div class="qa-answer"><div class="answer-vote"><button class="btn-upvote">&#x25B2;</button><span class="vote-count">'+a.votes+'</span><button class="btn-downvote">&#x25BC;</button></div><div class="answer-body"><div class="answer-meta"><div class="tiny-avatar '+a.cls+'">'+a.initials+'</div><strong>'+a.author+'</strong><span class="answer-time">'+a.time+'</span></div><p>'+a.text+'</p></div></div>').join('');
+                detailBody.innerHTML = '<div class="qa-detail-question"><div class="qa-detail-tags"><span class="tag-small '+thread.tagCls+'">'+thread.tag+'</span></div><h2>'+thread.title+'</h2><p class="qa-detail-desc">'+thread.body+'</p><div class="qa-detail-meta"><div class="tiny-avatar '+thread.authorCls+'">'+thread.authorInitials+'</div><span>Posted by <strong>'+thread.author+'</strong> &bull; '+thread.time+'</span></div></div><div class="qa-answers-section"><h4 class="answers-title">'+thread.answers.length+' Answer'+(thread.answers.length!==1?'s':'')+'</h4><div class="qa-answers-list">'+answersHtml+'</div></div><div class="qa-reply-form"><h4>Your Answer</h4><textarea class="qa-reply-textarea" rows="3" placeholder="Share your knowledge..."></textarea><button class="btn-post-reply">Post Answer</button></div>';
+                const replyBtn = detailBody.querySelector('.btn-post-reply');
+                const replyBox = detailBody.querySelector('.qa-reply-textarea');
+                const answerList = detailBody.querySelector('.qa-answers-list');
+                const answersTitle = detailBody.querySelector('.answers-title');
+                replyBtn.addEventListener('click', () => {
+                    const text = replyBox.value.trim();
+                    if (!text) return;
+                    answerList.insertAdjacentHTML('afterbegin','<div class="qa-answer" style="border-left-color:var(--accent-color)"><div class="answer-vote"><button class="btn-upvote voted" style="color:#ff7675">&#x25B2;</button><span class="vote-count">1</span><button class="btn-downvote">&#x25BC;</button></div><div class="answer-body"><div class="answer-meta"><div class="tiny-avatar bg-purple">A</div><strong>Alex (You)</strong><span class="answer-time">Just now</span></div><p>'+text+'</p></div></div>');
+                    const count = answerList.querySelectorAll('.qa-answer').length;
+                    answersTitle.textContent = count+' Answer'+(count!==1?'s':'');
+                    replyBox.value = '';
+                });
+                overlay.classList.add('open');
+                setTimeout(() => panel.classList.add('open'), 10);
+            }
+            function closeThread() { panel.classList.remove('open'); setTimeout(() => overlay.classList.remove('open'), 300); }
+            document.addEventListener('click', function(e) {
+                const thread = e.target.closest('.qa-thread[data-id]');
+                if (thread && !e.target.closest('.btn-upvote,.btn-downvote,.btn-share')) openThread(thread.dataset.id);
+            });
+            backBtn.addEventListener('click', closeThread);
+            overlay.addEventListener('click', (e) => { if (e.target === overlay) closeThread(); });
+        });
+    </script>
+    <style>
+        .qa-thread[data-id]{cursor:pointer}
+        .qa-detail-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);z-index:9000;display:none}
+        .qa-detail-overlay.open{display:block}
+        .qa-detail-panel{position:fixed;top:0;right:0;width:min(580px,100vw);height:100vh;background:#111115;border-left:1px solid rgba(108,92,231,.3);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);z-index:9001;overflow:hidden}
+        .qa-detail-panel.open{transform:translateX(0)}
+        .qa-detail-header{display:flex;align-items:center;gap:15px;padding:16px 20px;border-bottom:1px solid rgba(255,255,255,.07);flex-shrink:0}
+        .qa-back-btn{background:rgba(255,255,255,.07);border:none;color:#ccc;padding:8px 14px;border-radius:10px;cursor:pointer;font-size:.9rem;transition:.2s}
+        .qa-back-btn:hover{background:rgba(255,255,255,.14);color:#fff}
+        .qa-detail-label{color:var(--text-muted);font-size:.85rem}
+        .qa-detail-body{flex:1;overflow-y:auto;padding:24px 24px 60px;display:flex;flex-direction:column;gap:28px}
+        .qa-detail-question{display:flex;flex-direction:column;gap:12px}
+        .qa-detail-question h2{font-size:1.4rem;line-height:1.4;margin:0}
+        .qa-detail-desc{color:#b2bec3;font-size:.95rem;line-height:1.6;margin:0}
+        .qa-detail-meta{display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--text-muted)}
+        .qa-detail-tags{margin-bottom:4px}
+        .answers-title{font-size:1rem;color:var(--text-muted);margin:0 0 14px;font-weight:600}
+        .qa-answers-list{display:flex;flex-direction:column;gap:14px}
+        .qa-answer{display:flex;gap:14px;background:rgba(255,255,255,.04);border-radius:12px;border-left:3px solid rgba(255,255,255,.1);padding:14px;transition:border-color .2s}
+        .qa-answer:hover{border-left-color:var(--accent-color)}
+        .answer-vote{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:36px}
+        .answer-vote button{background:none;border:none;color:var(--text-muted);font-size:.9rem;cursor:pointer;transition:color .2s}
+        .answer-vote .vote-count{font-size:.85rem;font-weight:bold}
+        .answer-body{flex:1;display:flex;flex-direction:column;gap:8px}
+        .answer-meta{display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--text-muted)}
+        .answer-time{margin-left:auto}
+        .answer-body p{margin:0;font-size:.92rem;color:#ddd;line-height:1.6}
+        .qa-reply-form{display:flex;flex-direction:column;gap:10px}
+        .qa-reply-form h4{margin:0;font-size:1rem}
+        .qa-reply-textarea{background:rgba(255,255,255,.05);border:1px solid var(--glass-border);border-radius:12px;color:#fff;padding:12px;font-family:'Inter',sans-serif;font-size:.9rem;resize:none;outline:none;transition:border-color .2s}
+        .qa-reply-textarea:focus{border-color:var(--accent-color)}
+        .btn-post-reply{align-self:flex-end;background:var(--accent-gradient);border:none;color:#fff;padding:10px 22px;border-radius:20px;font-weight:600;cursor:pointer;transition:.2s}
+        .btn-post-reply:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(108,92,231,.4)}
+    </style>
+
+    <script>
+        // Share button logic
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('btn-share')) {
+                e.stopPropagation(); // Don't open the thread panel
+                const thread = e.target.closest('.qa-thread[data-id]');
+                const title = thread ? thread.querySelector('.qa-title').textContent : 'CityMate Q&A';
+                const fakeUrl = window.location.origin + '/guides.html?thread=' + (thread ? thread.dataset.id : '');
+                
+                if (navigator.share) {
+                    navigator.share({ title: title, url: fakeUrl }).catch(() => {});
+                } else {
+                    navigator.clipboard.writeText(fakeUrl).then(() => {
+                        showToast('Link copied to clipboard!');
+                    }).catch(() => {
+                        showToast('Link: ' + fakeUrl);
+                    });
+                }
+            }
+        });
+
+        function showToast(msg) {
+            let toast = document.getElementById('share-toast');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.id = 'share-toast';
+                document.body.appendChild(toast);
+            }
+            toast.textContent = msg;
+            toast.classList.add('visible');
+            clearTimeout(toast._timer);
+            toast._timer = setTimeout(() => toast.classList.remove('visible'), 2500);
         }
-
-        // --- NAVIGATION DANS LE CHAT (Liste <-> Conversation) ---
-        const listView = document.getElementById('chat-list-view');
-        const convoView = document.getElementById('chat-conversation-view');
-        const chatTitle = document.getElementById('current-chat-name');
-
-        // On rend ces fonctions globales pour qu'elles marchent avec les onclick="..." du HTML
-        window.openConversation = function(name, isGroup) {
-            if(listView && convoView) {
-                listView.classList.remove('active');
-                convoView.classList.add('active');
-                if(chatTitle) chatTitle.textContent = name;
-            }
-        };
-
-        window.closeConversation = function() {
-            if(listView && convoView) {
-                convoView.classList.remove('active');
-                listView.classList.add('active');
-            }
-        };
-    });
-</script>
-
+    </script>
+    <style>
+        #share-toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: rgba(30, 30, 38, 0.95);
+            color: #fff;
+            padding: 12px 22px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid rgba(108,92,231,0.5);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+            z-index: 99999;
+        }
+        #share-toast.visible {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+    </style>
 </body>
-
 </html>

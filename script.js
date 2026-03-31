@@ -257,6 +257,17 @@ const form = document.getElementById('activity-form');
 // Ouvrir la modale
 hostBtn.addEventListener('click', () => {
     modal.classList.add('open');
+
+    const today = new Date();
+    // On transforme la date du jour en format "AAAA-MM-JJ" (ex: 2023-10-25)
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0'); // Janvier = 0 !
+    const dd = String(today.getDate()).padStart(2, '0');
+    
+    const minDate = `${yyyy}-${mm}-${dd}`;
+    
+    // On applique la contrainte au champ date
+    document.getElementById('event-date').setAttribute('min', minDate);
 });
 
 // Fermer la modale (Bouton X)
@@ -281,6 +292,8 @@ form.addEventListener('submit', (e) => {
     const name = document.getElementById('event-name').value;
     const address = document.getElementById('event-address').value;
     const city = document.getElementById('event-city').value;
+    const date = document.getElementById('event-date').value;
+    const time = document.getElementById('event-time').value;
     const type = document.getElementById('event-type').value;
     const desc = document.getElementById('event-desc').value;
     const submitBtn = form.querySelector('.submit-btn');
@@ -317,7 +330,6 @@ form.addEventListener('submit', (e) => {
 
             const newIcon = createCustomIcon(emoji, colorClass);
 
-            // --- C'EST ICI QUE CA CHANGE ---
             
             // Si on éditait un marqueur, on supprime l'ancien d'abord !
             if (currentEditingMarker) {
@@ -328,9 +340,11 @@ form.addEventListener('submit', (e) => {
             // Note le "true" à la fin pour dire "C'est un user event"
             // Et on passe l'objet {name, address...} pour pouvoir le rééditer plus tard
             addMarker(lat, lng, newIcon, type, 
-                `<b>${name}</b><br>${desc}<br><i>📍 ${address}, ${city}</i>`, 
+                `<b>${name}</b><br>
+                 📅 ${date} à ${time}<br> ${desc}<br>
+                 <i>📍 ${address}, ${city}</i>`, 
                 true, 
-                {name, address, city, type, desc}
+                {name, address, city, date, time, type, desc} // <-- AJOUT DANS LA SAUVEGARDE
             );
 
             saveUserEvents();
@@ -383,6 +397,8 @@ window.editEvent = function(id) {
         document.getElementById('event-name').value = marker.data.name;
         document.getElementById('event-address').value = marker.data.address;
         document.getElementById('event-city').value = marker.data.city;
+        document.getElementById('event-date').value = marker.data.date || ''; // Le || '' évite le bug si c'est un vieil event
+        document.getElementById('event-time').value = marker.data.time || '';
         document.getElementById('event-type').value = marker.data.type;
         document.getElementById('event-desc').value = marker.data.desc;
 
@@ -461,33 +477,55 @@ function saveUserEvents() {
     console.log("Events saved!", userEvents);
 }
 
-// --- 10. CHARGEMENT AU DÉMARRAGE ---
+// --- 10. CHARGEMENT INTELLIGENT (AUTO-DELETE) ---
 
 function loadUserEvents() {
     const savedData = localStorage.getItem('citymate_events');
     
     if (savedData) {
-        const events = JSON.parse(savedData);
+        let events = JSON.parse(savedData);
+        const now = new Date(); // L'heure exacte de maintenant
         
-        events.forEach(data => {
+        // 1. FILTRAGE : On ne garde que les événements futurs
+        const futureEvents = events.filter(data => {
+            // On reconstruit la date de l'événement
+            // data.date est "2023-10-25" et data.time est "14:30"
+            if (data.date && data.time) {
+                const eventDate = new Date(`${data.date}T${data.time}`);
+                return eventDate > now; // VRAI si l'événement est dans le futur
+            }
+            return true; // Si pas de date (vieux bug), on garde par sécurité
+        });
+
+        // 2. NETTOYAGE : Si on a supprimé des vieux trucs, on met à jour la mémoire
+        if (events.length !== futureEvents.length) {
+            console.log("🧹 Nettoyage : " + (events.length - futureEvents.length) + " événements expirés supprimés.");
+            localStorage.setItem('citymate_events', JSON.stringify(futureEvents));
+        }
+
+        // 3. AFFICHAGE : On affiche seulement ceux qui restent
+        futureEvents.forEach(data => {
             // On recrée l'icône
             let emoji = '📍';
             let colorClass = '';
             if (data.type === 'party') { emoji = '🎉'; colorClass = 'bg-red'; }
             if (data.type === 'food')  { emoji = '🍔'; colorClass = 'bg-yellow'; }
-            if (data.type === 'study') { emoji = '📚'; colorClass = ''; }
+            if (data.type === 'study') { emoji = '📚'; colorClass = 'bg-blue'; } // J'ai mis bg-blue par défaut
             if (data.type === 'sport') { emoji = '⚽'; colorClass = 'bg-green'; }
             if (data.type === 'activity') { emoji = '🎳'; colorClass = 'bg-pink'; }
 
             const newIcon = createCustomIcon(emoji, colorClass);
             
-            // On remet le marqueur sur la carte sans rappeler l'API !
+            // On remet le marqueur sur la carte
             addMarker(
                 data.lat, 
                 data.lng, 
                 newIcon, 
                 data.type, 
-                `<b>${data.name}</b><br>${data.desc}<br><i>📍 ${data.address}, ${data.city}</i>`,
+                `<b>${data.name}</b><br>
+                 📅 ${data.date} à ${data.time}<br>
+                 ${data.desc}<br>
+                 <i>📍 ${data.address}, ${data.city}</i>`,
                 true,
                 data
             );

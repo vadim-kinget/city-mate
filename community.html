@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,11 +8,13 @@
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#6c5ce7">
     <link rel="apple-touch-icon" href="icon.png">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%236c5ce7'/><text x='50' y='65' font-family='Arial, sans-serif' font-weight='bold' font-size='50' fill='white' text-anchor='middle'>CM</text></svg>">
-    
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%236c5ce7'/><text x='50' y='65' font-family='Arial, sans-serif' font-weight='bold' font-size='50' fill='white' text-anchor='middle'>CM</text></svg>">
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style-main.css">
 </head>
+
 <body>
 
     <nav>
@@ -24,18 +27,15 @@
                 <span class="nav-icon">📖</span>
                 <span class="nav-text">Guides</span>
             </a>
-            <a href="deals.html">
-                <span class="nav-icon">🏷️</span>
-                <span class="nav-text">Deals</span>
-            </a>
+
             <a href="community.html" class="active">
                 <span class="nav-icon">👥</span>
                 <span class="nav-text">Community</span>
             </a>
         </div>
 
-        <div class="nav-right" style="display: flex; align-items: center; gap: 15px;">
-    
+        <div class="nav-right">
+
             <button id="chat-toggle" class="chat-btn">
                 💬 <span class="notif-badge">2</span>
             </button>
@@ -49,58 +49,69 @@
     </nav>
 
     <div class="community-container">
-        
+
         <header class="community-header">
             <h1>Community Hub 🌍</h1>
             <p>Connect with people, join squads, and find your language buddy.</p>
         </header>
 
         <div class="comm-grid">
-            
+
             <div class="comm-main">
-                
+
                 <div class="section-title">
                     <h2>🔥 Popular Squads</h2>
-                    <a href="#">See all</a>
+                    <a href="#" id="create-squad-btn"
+                        style="background: var(--primary-color); padding: 8px 12px; border-radius: 20px; color: white; text-decoration: none; font-size: 0.9rem;">+
+                        Create Squad</a>
                 </div>
 
-                <div class="squads-row">
+                <div class="squads-row" id="squads-container">
                     <div class="squad-card">
-                        <div class="squad-icon bg-purple">🎨</div>
-                        <div class="squad-info">
-                            <h3>Museum Lovers</h3>
-                            <p>128 Members</p>
-                        </div>
+                        <a href="squad_details.html?name=Museum%20Lovers"
+                            style="text-decoration:none; color:inherit; display:flex; align-items:center; flex:1; gap: 15px;">
+                            <div class="squad-icon bg-purple">🎨</div>
+                            <div class="squad-info">
+                                <h3>Museum Lovers</h3>
+                                <p>128 Members</p>
+                            </div>
+                        </a>
                         <button class="join-btn">Join</button>
                     </div>
 
                     <div class="squad-card">
-                        <div class="squad-icon bg-green">🥾</div>
-                        <div class="squad-info">
-                            <h3>Hikers of Lille</h3>
-                            <p>85 Members</p>
-                        </div>
+                        <a href="squad_details.html?name=Hikers%20of%20Lille"
+                            style="text-decoration:none; color:inherit; display:flex; align-items:center; flex:1; gap: 15px;">
+                            <div class="squad-icon bg-green">🥾</div>
+                            <div class="squad-info">
+                                <h3>Hikers of Lille</h3>
+                                <p>85 Members</p>
+                            </div>
+                        </a>
                         <button class="join-btn">Join</button>
                     </div>
 
                     <div class="squad-card">
-                        <div class="squad-icon bg-red">🎮</div>
-                        <div class="squad-info">
-                            <h3>Gaming Night</h3>
-                            <p>240 Members</p>
-                        </div>
+                        <a href="squad_details.html?name=Gaming%20Night"
+                            style="text-decoration:none; color:inherit; display:flex; align-items:center; flex:1; gap: 15px;">
+                            <div class="squad-icon bg-red">🎮</div>
+                            <div class="squad-info">
+                                <h3>Gaming Night</h3>
+                                <p>240 Members</p>
+                            </div>
+                        </a>
                         <button class="join-btn">Join</button>
                     </div>
                 </div>
 
-                <div class="section-title" style="margin-top: 40px;">
+                <div class="section-title mt-40">
                     <h2>🗣️ Language Buddies</h2>
                     <p class="subtitle">Practice a new language with a local.</p>
                 </div>
 
                 <div class="buddies-grid">
                     <div class="buddy-card">
-                        <div class="buddy-avatar" style="background: #ff7675;">SJ</div>
+                        <div class="buddy-avatar avatar-red">SJ</div>
                         <div class="buddy-info">
                             <h3>Sarah J.</h3>
                             <div class="langs">
@@ -113,7 +124,7 @@
                     </div>
 
                     <div class="buddy-card">
-                        <div class="buddy-avatar" style="background: #0984e3;">MK</div>
+                        <div class="buddy-avatar avatar-blue">MK</div>
                         <div class="buddy-info">
                             <h3>Mehdi K.</h3>
                             <div class="langs">
@@ -130,7 +141,7 @@
 
             <aside class="comm-sidebar">
                 <h3>🔔 Live Activity</h3>
-                
+
                 <div class="feed-list">
                     <div class="feed-item">
                         <div class="feed-icon">🍕</div>
@@ -173,105 +184,157 @@
         </div>
     </div>
 
-<div id="chat-drawer" class="chat-drawer">
-    
-    <div class="chat-header">
-        <h3>Messages</h3>
-        <button id="close-chat" class="close-btn">&times;</button>
-    </div>
+    <div id="comm-modal-overlay" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2>✨ Create a Squad</h2>
+                <button id="close-comm-modal" class="close-btn">&times;</button>
+            </div>
 
-    <div id="chat-list-view" class="chat-view active">
-        
-        <div class="chat-tabs">
-            <span class="chat-tab active">All</span>
-            <span class="chat-tab">Groups</span>
-            <span class="chat-tab">Private</span>
-        </div>
-
-        <div class="conversations-list">
-            
-            <div class="convo-item" onclick="openConversation('Museum Lovers 🎨', true)">
-                <div class="convo-avatar bg-purple">🎨</div>
-                <div class="convo-info">
-                    <h4>Museum Lovers</h4>
-                    <p>Lena: Anyone going to Palais des B...</p>
+            <form id="comm-form">
+                <div class="form-group">
+                    <label>Squad Name</label>
+                    <input type="text" id="comm-name" placeholder="Ex: Sunday Runners" required>
                 </div>
-                <span class="time">2m</span>
-            </div>
 
-            <div class="convo-item" onclick="openConversation('Sarah J. 🇬🇧', false)">
-                <div class="convo-avatar" style="background: #ff7675;">SJ</div>
-                <div class="convo-info">
-                    <h4>Sarah J.</h4>
-                    <p>That sounds great! See you there.</p>
+                <div class="form-group">
+                    <label>Short Description</label>
+                    <textarea id="comm-desc" rows="2" placeholder="What is this group about?"></textarea>
                 </div>
-                <span class="time">1h</span>
-            </div>
 
-             <div class="convo-item unread">
-                <div class="convo-avatar" style="background: #0984e3;">MK</div>
-                <div class="convo-info">
-                    <h4>Mehdi K.</h4>
-                    <p>Do you know where the library is?</p>
+                <div class="form-row">
+                    <div class="form-group flex-1">
+                        <label>Icon (Emoji)</label>
+                        <input type="text" id="comm-icon" placeholder="👟" maxlength="2">
+                    </div>
+                    <div class="form-group flex-1">
+                        <label>Color</label>
+                        <select id="comm-color">
+                            <option value="bg-purple">Purple</option>
+                            <option value="bg-green">Green</option>
+                            <option value="bg-red">Red</option>
+                            <option value="bg-blue">Blue</option>
+                            <option value="bg-yellow">Yellow</option>
+                        </select>
+                    </div>
                 </div>
-                <span class="time">3h</span>
-                <div class="unread-dot"></div>
-            </div>
-        </div>
-    </div>
 
-    <div id="chat-conversation-view" class="chat-view">
-        <div class="active-chat-header">
-            <button class="back-btn" onclick="closeConversation()">←</button>
-            <h4 id="current-chat-name">User Name</h4>
-        </div>
+                <div class="form-group">
+                    <label>Visibility</label>
+                    <div class="visibility-toggle">
+                        <button type="button" class="vis-btn active" data-vis="public">🌍 Public</button>
+                        <button type="button" class="vis-btn" data-vis="private">🔒 Private</button>
+                    </div>
+                </div>
 
-        <div class="messages-container">
-            <div class="message received">
-                <p>Hey! Are you coming to the event tonight?</p>
-                <span class="msg-time">10:30 AM</span>
-            </div>
-
-            <div class="message sent">
-                <p>Yes absolutely! I'm bringing a friend.</p>
-                <span class="msg-time">10:32 AM</span>
-            </div>
-            
-            <div class="message received">
-                <p>Awesome, see you at the Gare St Sauveur! 🚂</p>
-                <span class="msg-time">10:33 AM</span>
-            </div>
-        </div>
-
-        <div class="chat-input-area">
-            <input type="text" placeholder="Type a message..." id="msg-input">
-            <button class="send-btn">➤</button>
+                <button type="submit" class="submit-btn">Create Squad</button>
+            </form>
         </div>
     </div>
 
-</div>
+    <div id="chat-drawer" class="chat-drawer">
+
+        <div class="chat-header">
+            <h3>Messages</h3>
+            <button id="close-chat" class="close-btn">&times;</button>
+        </div>
+
+        <div id="chat-list-view" class="chat-view active">
+
+            <div class="chat-tabs">
+                <span class="chat-tab active">All</span>
+                <span class="chat-tab">Groups</span>
+                <span class="chat-tab">Private</span>
+            </div>
+
+            <div class="conversations-list">
+
+                <div class="convo-item" onclick="openConversation('Museum Lovers 🎨', true)">
+                    <div class="convo-avatar bg-purple">🎨</div>
+                    <div class="convo-info">
+                        <h4>Museum Lovers</h4>
+                        <p>Lena: Anyone going to Palais des B...</p>
+                    </div>
+                    <span class="time">2m</span>
+                </div>
+
+                <div class="convo-item" onclick="openConversation('Sarah J. 🇬🇧', false)">
+                    <div class="convo-avatar avatar-red">SJ</div>
+                    <div class="convo-info">
+                        <h4>Sarah J.</h4>
+                        <p>That sounds great! See you there.</p>
+                    </div>
+                    <span class="time">1h</span>
+                </div>
+
+                <div class="convo-item unread">
+                    <div class="convo-avatar avatar-blue">MK</div>
+                    <div class="convo-info">
+                        <h4>Mehdi K.</h4>
+                        <p>Do you know where the library is?</p>
+                    </div>
+                    <span class="time">3h</span>
+                    <div class="unread-dot"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="chat-conversation-view" class="chat-view">
+            <div class="active-chat-header">
+                <button class="back-btn" onclick="closeConversation()">←</button>
+                <h4 id="current-chat-name">User Name</h4>
+            </div>
+
+            <div class="messages-container">
+                <div class="message received">
+                    <p>Hey! Are you coming to the event tonight?</p>
+                    <span class="msg-time">10:30 AM</span>
+                </div>
+
+                <div class="message sent">
+                    <p>Yes absolutely! I'm bringing a friend.</p>
+                    <span class="msg-time">10:32 AM</span>
+                </div>
+
+                <div class="message received">
+                    <p>Awesome, see you at the Gare St Sauveur! 🚂</p>
+                    <span class="msg-time">10:33 AM</span>
+                </div>
+            </div>
+
+            <div class="chat-input-area">
+                <input type="text" placeholder="Type a message..." id="msg-input">
+                <button class="send-btn">➤</button>
+            </div>
+        </div>
+
+    </div>
 
     <script>
         // Boutons Join
         document.querySelectorAll('.join-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                if(this.textContent === 'Join') {
-                    this.textContent = 'Joined ✓';
-                    this.style.background = 'transparent';
-                    this.style.border = '1px solid var(--accent-color)';
-                    this.style.color = 'var(--accent-color)';
-                } else {
-                    this.textContent = 'Join';
-                    this.style.background = 'var(--glass-bg)';
-                    this.style.border = 'none';
-                    this.style.color = 'white';
-                }
+            btn.addEventListener('click', function () {
+                toggleJoin(this);
             });
         });
 
+        function toggleJoin(btn) {
+            if (btn.textContent === 'Join') {
+                btn.textContent = 'Joined ✓';
+                btn.style.background = 'transparent';
+                btn.style.border = '1px solid var(--accent-color)';
+                btn.style.color = 'var(--accent-color)';
+            } else {
+                btn.textContent = 'Join';
+                btn.style.background = 'var(--glass-bg)';
+                btn.style.border = 'none';
+                btn.style.color = 'white';
+            }
+        }
+
         // Boutons Connect
         document.querySelectorAll('.connect-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
+            btn.addEventListener('click', function () {
                 this.textContent = 'Request Sent 📩';
                 this.style.background = '#00b894'; // Vert
                 this.disabled = true;
@@ -280,56 +343,156 @@
     </script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            
-            // 1. On récupère les éléments
+        document.addEventListener('DOMContentLoaded', function () {
+
+            // --- GESTION DU CHAT ---
             const chatDrawer = document.getElementById('chat-drawer');
             const chatToggle = document.getElementById('chat-toggle');
             const closeChatBtn = document.getElementById('close-chat');
 
-            // Vérification de sécurité (au cas où on oublie le HTML)
             if (chatToggle && chatDrawer) {
-                
-                // 2. Ouvrir le tiroir
-                chatToggle.addEventListener('click', () => {
-                    chatDrawer.classList.add('open');
-                });
-
-                // 3. Fermer le tiroir
-                if (closeChatBtn) {
-                    closeChatBtn.addEventListener('click', () => {
-                        chatDrawer.classList.remove('open');
-                    });
-                }
-
-                // Fermer si on clique sur le fond flouté (optionnel mais sympa)
+                chatToggle.addEventListener('click', () => chatDrawer.classList.add('open'));
+                if (closeChatBtn) closeChatBtn.addEventListener('click', () => chatDrawer.classList.remove('open'));
                 chatDrawer.addEventListener('click', (e) => {
-                    if (e.target === chatDrawer) {
-                        chatDrawer.classList.remove('open');
-                    }
+                    if (e.target === chatDrawer) chatDrawer.classList.remove('open');
                 });
             }
 
-            // --- NAVIGATION DANS LE CHAT (Liste <-> Conversation) ---
             const listView = document.getElementById('chat-list-view');
             const convoView = document.getElementById('chat-conversation-view');
             const chatTitle = document.getElementById('current-chat-name');
 
-            // On rend ces fonctions globales pour qu'elles marchent avec les onclick="..." du HTML
-            window.openConversation = function(name, isGroup) {
-                if(listView && convoView) {
+            window.openConversation = function (name, isGroup) {
+                if (listView && convoView) {
                     listView.classList.remove('active');
                     convoView.classList.add('active');
-                    if(chatTitle) chatTitle.textContent = name;
+                    if (chatTitle) chatTitle.textContent = name;
                 }
             };
 
-            window.closeConversation = function() {
-                if(listView && convoView) {
+            window.closeConversation = function () {
+                if (listView && convoView) {
                     convoView.classList.remove('active');
                     listView.classList.add('active');
                 }
             };
+
+            // --- GESTION DE LA CRÉATION DE COMMUNAUTÉ ---
+
+            let selectedVisibility = 'public';
+            const visBtns = document.querySelectorAll('.vis-btn');
+            visBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    visBtns.forEach(b => b.classList.remove('active'));
+                    e.currentTarget.classList.add('active');
+                    selectedVisibility = e.currentTarget.getAttribute('data-vis');
+                });
+            });
+
+            const createBtn = document.getElementById('create-squad-btn');
+            const commModal = document.getElementById('comm-modal-overlay');
+            const closeCommBtn = document.getElementById('close-comm-modal');
+            const commForm = document.getElementById('comm-form');
+            const squadsContainer = document.getElementById('squads-container');
+
+            // 1. Ouvrir / Fermer la modale
+            if (createBtn) {
+                createBtn.addEventListener('click', (e) => {
+                    e.preventDefault(); // Empêche le # du lien
+                    commModal.classList.add('open');
+                });
+            }
+
+            if (closeCommBtn) {
+                closeCommBtn.addEventListener('click', () => commModal.classList.remove('open'));
+            }
+
+            if (commModal) {
+                commModal.addEventListener('click', (e) => {
+                    if (e.target === commModal) commModal.classList.remove('open');
+                });
+            }
+
+            // 2. Soumission du formulaire
+            if (commForm) {
+                commForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+
+                    const name = document.getElementById('comm-name').value;
+                    const desc = document.getElementById('comm-desc').value;
+                    const icon = document.getElementById('comm-icon').value || '🔥'; // Emoji par défaut
+                    const color = document.getElementById('comm-color').value;
+
+                    const newSquad = {
+                        id: Date.now(),
+                        name: name,
+                        members: 1, // On commence avec 1 membre (le créateur)
+                        icon: icon,
+                        colorClass: color, // ex: bg-purple
+                        visibility: selectedVisibility,
+                        isUserCreated: true
+                    };
+
+                    saveSquad(newSquad);
+                    addSquadToDOM(newSquad);
+
+                    // Reset et fermeture
+                    commForm.reset();
+                    commModal.classList.remove('open');
+                });
+            }
+
+            // 3. Sauvegarder dans localStorage
+            function saveSquad(squad) {
+                let squads = JSON.parse(localStorage.getItem('my_squads') || '[]');
+                squads.push(squad);
+                localStorage.setItem('my_squads', JSON.stringify(squads));
+            }
+
+            // 4. Charger au démarrage
+            function loadSquads() {
+                let squads = JSON.parse(localStorage.getItem('my_squads') || '[]');
+                squads.forEach(squad => addSquadToDOM(squad));
+            }
+
+            // 5. Ajouter au DOM
+            function addSquadToDOM(squad) {
+                // Création de la carte HTML
+                const card = document.createElement('div');
+                card.className = 'squad-card';
+
+                // On met un lien autour de l'info
+                const link = `squad_details.html?id=${squad.id}&name=${encodeURIComponent(squad.name)}`;
+
+                card.innerHTML = `
+                    <a href="${link}" style="text-decoration:none; color:inherit; display:flex; align-items:center; flex:1; gap: 15px;">
+                        <div class="squad-icon ${squad.colorClass}">${squad.icon}</div>
+                        <div class="squad-info">
+                            <h3 style="display:flex; align-items:center; gap:5px;">
+                                ${squad.name}
+                                ${squad.visibility === 'private' ? '<span class="private-badge" title="Private Squad">🔒</span>' : ''}
+                            </h3>
+                            <p>${squad.members} Members</p>
+                        </div>
+                    </a>
+                    <button class="join-btn">Joined ✓</button>
+                `;
+
+                // Style "Déjà rejoint"
+                const btn = card.querySelector('.join-btn');
+                toggleJoin(btn);
+
+                btn.addEventListener('click', function (e) {
+                    e.stopPropagation(); // Pour ne pas cliquer sur le lien
+                    toggleJoin(this);
+                });
+
+                if (squadsContainer) squadsContainer.appendChild(card);
+            }
+
+            // Lancer le chargement
+            loadSquads();
+
         });
     </script>
 
